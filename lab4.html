@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Margin, Padding, Align, Border, Outline, Opacity, Important</title>
+
+    <style>
+
+        /* Бүх элементэд box-sizing тохируулж байна */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Веб хуудасны үндсэн загвар */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 30px;
+        }
+
+        /* Гарчгийн загвар */
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Туршилт бүрийн хэсгийг хайрцагт оруулна */
+        .section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        /* =========================
+           1. CSS MARGIN
+           ========================= */
+
+        .margin-box {
+            background-color: lightblue;
+
+            /*
+             margin нь элементийн ГАДНА талын
+             зайг тохируулдаг.
+            */
+            margin: 30px;
+
+            padding: 20px;
+            border: 2px solid blue;
+        }
+
+
+        /* =========================
+           2. CSS PADDING
+           ========================= */
+
+        .padding-box {
+            background-color: lightgreen;
+
+            /*
+             padding нь элементийн
+             ДОТОР талын зайг тохируулдаг.
+             Текст болон border-ийн хоорондох зай юм.
+            */
+            padding: 40px;
+
+            border: 2px solid green;
+        }
+
+
+        /* =========================
+           3. CSS ALIGN
+           ========================= */
+
+        .align-box {
+            background-color: #fff59d;
+
+            /*
+             text-align нь текстийн
+             байрлалыг тохируулдаг.
+             center = голд байрлуулна.
+            */
+            text-align: center;
+
+            padding: 20px;
+            border: 2px solid orange;
+        }
+
+
+        /* =========================
+           4. CSS BORDER
+           ========================= */
+
+        .border-box {
+            background-color: white;
+
+            /*
+             border нь элементийн
+             эргэн тойронд хүрээ үүсгэнэ.
+
+             5px = хүрээний зузаан
+             solid = хүрээний төрөл
+             red = хүрээний өнгө
+            */
+            border: 5px solid red;
+
+            padding: 20px;
+        }
+
+
+        /* =========================
+           5. CSS OUTLINE
+           ========================= */
+
+        .outline-box {
+            background-color: white;
+
+            /*
+             outline нь border-ийн
+             ГАДНА талд нэмэлт хүрээ үүсгэнэ.
+            */
+            border: 3px solid blue;
+
+            outline: 5px dashed red;
+
+            padding: 20px;
+
+            margin: 10px;
+        }
+
+
+        /* =========================
+           6. CSS OPACITY
+           ========================= */
+
+        .opacity-box {
+            background-color: purple;
+            color: white;
+
+            /*
+             opacity нь элементийн
+             тунгалаг байдлыг тохируулна.
+
+             1   = бүрэн тод
+             0.5 = 50% тунгалаг
+             0   = бүрэн харагдахгүй
+            */
+            opacity: 0.5;
+
+            padding: 30px;
+            text-align: center;
+        }
+
+
+        /* =========================
+           7. CSS !IMPORTANT
+           ========================= */
+
+        .important-box {
+            /*
+             Энгийн CSS дүрмээр
+             текстийг цэнхэр болгоно.
+            */
+            color: blue;
+
+            font-size: 20px;
+        }
+
+        .important-box {
+            /*
+             !important нь тухайн CSS
+             дүрэмд давуу эрх олгоно.
+
+             Тиймээс дээрх blue өнгөний
+             оронд red өнгө үйлчилнэ.
+            */
+            color: red !important;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Properties Туршилтын ажил</h1>
+
+
+    <!-- =========================
+         MARGIN ТУРШИЛТ
+         ========================= -->
+
+    <div class="section">
+
+        <h2>1. CSS Margin</h2>
+
+        <p>
+            Margin нь элементийн гаднах зайг тохируулна.
+        </p>
+
+        <div class="margin-box">
+            Margin: 30px
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         PADDING ТУРШИЛТ
+         ========================= -->
+
+    <div class="section">
+
+        <h2>2. CSS Padding</h2>
+
+        <p>
+            Padding нь элементийн доторх зайг тохируулна.
+        </p>
+
+        <div class="padding-box">
+            Padding: 40px
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         ALIGN ТУРШИЛТ
+         ========================= -->
+
+    <div class="section">
+
+        <h2>3. CSS Align</h2>
+
+        <p>
+            text-align нь текстийн байрлалыг тохируулна.
+        </p>
+
+        <div class="align-box">
+            Энэ текст төвд байрласан.
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         BORDER ТУРШИЛТ
+         ========================= -->
+
+    <div class="section">
+
+        <h2>4. CSS Border</h2>
+
+        <p>
+            Border нь элементийн эргэн тойронд хүрээ үүсгэнэ.
+        </p>
+
+        <div class="border-box">
+            Border: 5px solid red
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         OUTLINE ТУРШИЛТ
+         ========================= -->
+
+    <div class="section">
+
+        <h2>5. CSS Outline</h2>
+
+        <p>
+            Outline нь border-ийн гадна талд хүрээ үүсгэнэ.
+        </p>
+
+        <div class="outline-box">
+            Border + Outline
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         OPACITY ТУРШИЛТ
+         ========================= -->
+
+    <div class="section">
+
+        <h2>6. CSS Opacity</h2>
+
+        <p>
+            Opacity нь элементийн тунгалаг байдлыг тохируулна.
+        </p>
+
+        <div class="opacity-box">
+            Opacity: 0.5
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         !IMPORTANT ТУРШИЛТ
+         ========================= -->
+
+    <div class="section">
+
+        <h2>7. CSS !important</h2>
+
+        <p>
+            !important нь CSS дүрэмд давуу эрх олгоно.
+        </p>
+
+        <p class="important-box">
+            Энэ текст !important ашигласан тул УЛААН өнгөтэй байна.
+        </p>
+
+    </div>
+
+
+</body>
+</html>

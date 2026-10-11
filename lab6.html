@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="mn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flexbox хичээл</title>
+
+    <style>
+
+        /* =====================================================
+           1. BODY
+           Хуудасны үндсэн хэсэг
+        ===================================================== */
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 30px;
+        }
+
+
+        /* =====================================================
+           2. DIV ГЭЖ ЮУ ВЭ?
+           
+           <div> нь HTML дээр элементүүдийг нэг дор
+           бүлэглэх зориулалттай сав (container) юм.
+        ===================================================== */
+
+        .div-example {
+            background-color: white;
+            border: 2px solid #333;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+
+        /* =====================================================
+           3. DISPLAY: BLOCK
+           
+           div-ийн үндсэн display нь block байдаг.
+           Block элемент шинэ мөрөөс эхэлдэг.
+        ===================================================== */
+
+        .block-box {
+            display: block;
+
+            background-color: lightblue;
+            padding: 15px;
+            margin: 5px;
+        }
+
+
+        /* =====================================================
+           4. DISPLAY: FLEX
+           
+           display: flex гэж бичсэнээр тухайн DIV
+           Flex container болно.
+
+           Дотор байгаа div-үүд нэг мөрөнд
+           байрлах боломжтой болно.
+        ===================================================== */
+
+        .flex-container {
+            display: flex;
+
+            background-color: white;
+            border: 3px solid #00a86b;
+            padding: 20px;
+
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+
+        /* Flex container-ийн доторх box */
+
+        .box {
+            width: 100px;
+            height: 100px;
+
+            background-color: #90ee90;
+
+            border: 2px solid green;
+
+            /* Box өөрөө бас flex container болж байна */
+            display: flex;
+
+            /* Текстийг хэвтээгээр голлуулна */
+            justify-content: center;
+
+            /* Текстийг босоогоор голлуулна */
+            align-items: center;
+
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           5. FLEX-DIRECTION: ROW
+           
+           row = зүүнээс баруун тийш
+        ===================================================== */
+
+        .row {
+            display: flex;
+
+            /* Элементүүд хэвтээ байрлана */
+            flex-direction: row;
+
+            gap: 10px;
+
+            background-color: white;
+            border: 3px solid blue;
+            padding: 20px;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =====================================================
+           6. FLEX-DIRECTION: COLUMN
+           
+           column = дээрээс доош
+        ===================================================== */
+
+        .column {
+            display: flex;
+
+            /* Элементүүд босоо байрлана */
+            flex-direction: column;
+
+            gap: 10px;
+
+            background-color: white;
+            border: 3px solid purple;
+            padding: 20px;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =====================================================
+           7. ROW-REVERSE
+           
+           row-ийн эсрэг чиглэл
+        ===================================================== */
+
+        .row-reverse {
+            display: flex;
+
+            flex-direction: row-reverse;
+
+            gap: 10px;
+
+            background-color: white;
+            border: 3px solid orange;
+            padding: 20px;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =====================================================
+           8. COLUMN-REVERSE
+           
+           column-ийн эсрэг чиглэл
+        ===================================================== */
+
+        .column-reverse {
+            display: flex;
+
+            flex-direction: column-reverse;
+
+            gap: 10px;
+
+            background-color: white;
+            border: 3px solid red;
+            padding: 20px;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* Гарчиг */
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <h1>HTML & CSS Flexbox</h1>
+
+
+    <!-- =====================================================
+         DIV
+         
+         div бол элементүүдийг бүлэглэх зориулалттай сав.
+    ====================================================== -->
+
+    <div class="div-example">
+
+        <h2>1. DIV гэж юу вэ?</h2>
+
+        <p>
+            &lt;div&gt; нь HTML дээр бусад элементүүдийг
+            нэг дор бүлэглэх зориулалттай container юм.
+        </p>
+
+        <div class="block-box">
+            DIV 1
+        </div>
+
+        <div class="block-box">
+            DIV 2
+        </div>
+
+        <div class="block-box">
+            DIV 3
+        </div>
+
+        <p>
+            Энд div-үүд block байдлаар ажиллаж байгаа
+            учраас дээр дээрээ байрлаж байна.
+        </p>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         DISPLAY: FLEX
+         
+         display: flex;
+         гэж бичсэнээр container Flexbox болно.
+    ====================================================== -->
+
+    <h2>2. display: flex</h2>
+
+    <div class="flex-container">
+
+        <div class="box">
+            Box 1
+        </div>
+
+        <div class="box">
+            Box 2
+        </div>
+
+        <div class="box">
+            Box 3
+        </div>
+
+    </div>
+
+    <p>
+        Дээрх container-д display: flex өгсөн тул
+        Box 1, Box 2, Box 3 нэг мөрөнд байрласан.
+    </p>
+
+
+
+    <!-- =====================================================
+         FLEX-DIRECTION: ROW
+    ====================================================== -->
+
+    <h2>3. flex-direction: row</h2>
+
+    <div class="row">
+
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+
+    </div>
+
+    <p>
+        <b>row</b> нь элементүүдийг зүүнээс баруун тийш
+        хэвтээ чиглэлээр байрлуулна.
+    </p>
+
+
+
+    <!-- =====================================================
+         FLEX-DIRECTION: COLUMN
+    ====================================================== -->
+
+    <h2>4. flex-direction: column</h2>
+
+    <div class="column">
+
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+
+    </div>
+
+    <p>
+        <b>column</b> нь элементүүдийг дээрээс доош
+        босоо чиглэлээр байрлуулна.
+    </p>
+
+
+
+    <!-- =====================================================
+         FLEX-DIRECTION: ROW-REVERSE
+    ====================================================== -->
+
+    <h2>5. flex-direction: row-reverse</h2>
+
+    <div class="row-reverse">
+
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+
+    </div>
+
+    <p>
+        <b>row-reverse</b> нь row-ийн эсрэг чиглэл.
+        Өөрөөр хэлбэл элементүүд баруунаас зүүн тийш
+        байрлана.
+    </p>
+
+
+
+    <!-- =====================================================
+         FLEX-DIRECTION: COLUMN-REVERSE
+    ====================================================== -->
+
+    <h2>6. flex-direction: column-reverse</h2>
+
+    <div class="column-reverse">
+
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+
+    </div>
+
+    <p>
+        <b>column-reverse</b> нь column-ийн эсрэг чиглэл.
+        Элементүүд доороос дээш байрлана.
+    </p>
+
+
+
+    <!-- =====================================================
+         ЭЦСИЙН ДҮГНЭЛТ
+    ====================================================== -->
+
+    <div class="div-example">
+
+        <h2>7. Дүгнэлт</h2>
+
+        <p>
+            <b>&lt;div&gt;</b> → Элементүүдийг бүлэглэх сав.
+        </p>
+
+        <p>
+            <b>display</b> → Элемент веб хуудсан дээр
+            хэрхэн байрлахыг тодорхойлно.
+        </p>
+
+        <p>
+            <b>display: flex</b> → Container-ийг Flexbox
+            болгож өгнө.
+        </p>
+
+        <p>
+            <b>flex-direction: row</b> → Хэвтээ байрлана →
+        </p>
+
+        <p>
+            <b>flex-direction: column</b> → Босоо байрлана ↓
+        </p>
+
+        <p>
+            <b>row-reverse</b> → Хэвтээгээр эсрэг чиглэлд
+            байрлана ←
+        </p>
+
+        <p>
+            <b>column-reverse</b> → Босоогоор эсрэг чиглэлд
+            байрлана ↑
+        </p>
+
+    </div>
+
+</body>
+</html>
+```

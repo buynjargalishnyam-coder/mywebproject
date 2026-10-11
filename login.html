@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MyWeb - Login Website</title>
+
+    <style>
+
+        /* =========================
+           ҮНДСЭН ТОХИРГОО
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #101010;
+            color: white;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            height: 70px;
+
+            background: #181818;
+
+            border-bottom: 2px solid #00ffb3;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 50px;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: #00ffb3;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #00ffb3;
+        }
+
+
+        /* =========================
+           БҮХ SECTION
+        ========================= */
+
+        section {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 50px 20px;
+        }
+
+
+        /* =========================
+           HOME
+        ========================= */
+
+        #home {
+            text-align: center;
+        }
+
+        .home-content {
+            max-width: 650px;
+        }
+
+        .home-content h1 {
+            font-size: 55px;
+            color: #00ffb3;
+            margin-bottom: 20px;
+        }
+
+        .home-content p {
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 13px 35px;
+
+            background: #00ffb3;
+            color: #101010;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #00cc8f;
+        }
+
+
+        /* =========================
+           FORM BOX
+        ========================= */
+
+        .form-box {
+            width: 400px;
+
+            padding: 40px;
+
+            background: #1c1c1c;
+
+            border: 2px solid #00ffb3;
+
+            border-radius: 15px;
+
+            box-shadow: 0 0 20px #00ffb333;
+        }
+
+        .form-box h2 {
+            text-align: center;
+
+            color: #00ffb3;
+
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+        .description {
+            text-align: center;
+
+            color: #999;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           INPUT
+        ========================= */
+
+        label {
+            display: block;
+
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+
+            padding: 12px;
+
+            margin-bottom: 20px;
+
+            background: #292929;
+
+            color: white;
+
+            border: 1px solid #555;
+
+            border-radius: 7px;
+
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #00ffb3;
+
+            box-shadow: 0 0 5px #00ffb3;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        button {
+            width: 100%;
+
+            padding: 12px;
+
+            background: #00ffb3;
+
+            color: #101010;
+
+            border: none;
+
+            border-radius: 7px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #00cc8f;
+        }
+
+
+        /* =========================
+           REMEMBER
+        ========================= */
+
+        .remember {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 20px;
+
+            color: #aaa;
+        }
+
+        .remember input {
+            width: auto;
+
+            margin: 0;
+        }
+
+
+        /* =========================
+           LINK
+        ========================= */
+
+        .bottom-text {
+            text-align: center;
+
+            color: #999;
+
+            margin-top: 20px;
+        }
+
+        .bottom-text a {
+            color: #00ffb3;
+        }
+
+
+        /* =========================
+           PROFILE
+        ========================= */
+
+        .profile-card {
+            width: 400px;
+
+            padding: 40px;
+
+            background: #1c1c1c;
+
+            border: 2px solid #00ffb3;
+
+            border-radius: 15px;
+
+            text-align: center;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            background: #00ffb3;
+
+            color: #101010;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 45px;
+
+            font-weight: bold;
+        }
+
+        .profile-card h2 {
+            color: #00ffb3;
+
+            margin-top: 20px;
+        }
+
+        .job {
+            color: #999;
+
+            margin-top: 8px;
+        }
+
+        hr {
+            border: none;
+
+            border-top: 1px solid #444;
+
+            margin: 25px 0;
+        }
+
+        .info {
+            text-align: left;
+
+            color: #ccc;
+
+            line-height: 2;
+        }
+
+        .logout {
+            display: block;
+
+            margin-top: 25px;
+
+            padding: 12px;
+
+            background: #333;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+        }
+
+        .logout:hover {
+            background: #00ffb3;
+
+            color: #101010;
+        }
+
+
+        /* =========================
+           CONTACT
+        ========================= */
+
+        textarea {
+            height: 120px;
+
+            resize: none;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            header {
+                height: auto;
+
+                padding: 20px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            nav {
+                gap: 12px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .home-content h1 {
+                font-size: 38px;
+            }
+
+            .form-box,
+            .profile-card {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     HEADER / NAVIGATION
+===================================== -->
+
+<header>
+
+    <div class="logo">
+        MyWeb
+    </div>
+
+    <nav>
+
+        <a href="#home">Нүүр</a>
+
+        <a href="#login">Login</a>
+
+        <a href="#register">Бүртгүүлэх</a>
+
+        <a href="#profile">Profile</a>
+
+        <a href="#contact">Холбоо барих</a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================
+     1. HOME PAGE
+===================================== -->
+
+<section id="home">
+
+    <div class="home-content">
+
+        <h1>
+            Welcome to MyWeb
+        </h1>
+
+        <p>
+            Манай веб сайтад тавтай морилно уу.
+            Та бүртгэл үүсгэж, өөрийн аккаунтаар
+            нэвтэрч профайлаа харах боломжтой.
+        </p>
+
+        <a href="#login" class="btn">
+            Нэвтрэх
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     2. LOGIN PAGE
+===================================== -->
+
+<section id="login">
+
+    <div class="form-box">
+
+        <h2>
+            LOGIN
+        </h2>
+
+        <p class="description">
+            Өөрийн бүртгэлээр нэвтэрнэ үү
+        </p>
+
+        <form>
+
+            <label>
+                Username
+            </label>
+
+            <input
+                type="text"
+                placeholder="Username"
+                required
+            >
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                placeholder="Password"
+                required
+            >
+
+
+            <div class="remember">
+
+                <input type="checkbox">
+
+                <span>
+                    Намайг сана
+                </span>
+
+            </div>
+
+
+            <button type="submit">
+                Log In
+            </button>
+
+        </form>
+
+
+        <p class="bottom-text">
+
+            Бүртгэл байхгүй юу?
+
+            <a href="#register">
+                Бүртгүүлэх
+            </a>
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     3. REGISTER PAGE
+===================================== -->
+
+<section id="register">
+
+    <div class="form-box">
+
+        <h2>
+            Бүртгүүлэх
+        </h2>
+
+        <p class="description">
+            Шинэ аккаунт үүсгэнэ үү
+        </p>
+
+
+        <form>
+
+            <label>
+                Овог нэр
+            </label>
+
+            <input
+                type="text"
+                placeholder="Овог нэр"
+                required
+            >
+
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                placeholder="example@gmail.com"
+                required
+            >
+
+
+            <label>
+                Username
+            </label>
+
+            <input
+                type="text"
+                placeholder="Username"
+                required
+            >
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                placeholder="Password"
+                required
+            >
+
+
+            <label>
+                Password давтах
+            </label>
+
+            <input
+                type="password"
+                placeholder="Password давтах"
+                required
+            >
+
+
+            <button type="submit">
+                Бүртгүүлэх
+            </button>
+
+        </form>
+
+
+        <p class="bottom-text">
+
+            Бүртгэлтэй юу?
+
+            <a href="#login">
+                Login
+            </a>
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     4. PROFILE PAGE
+===================================== -->
+
+<section id="profile">
+
+    <div class="profile-card">
+
+        <div class="avatar">
+            U
+        </div>
+
+
+        <h2>
+            User Name
+        </h2>
+
+
+        <p class="job">
+            Software / AI Student
+        </p>
+
+
+        <hr>
+
+
+        <div class="info">
+
+            <p>
+                <strong>Нэр:</strong>
+                User Name
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                user@gmail.com
+            </p>
+
+            <p>
+                <strong>Мэргэжил:</strong>
+                Software Engineering
+            </p>
+
+            <p>
+                <strong>Статус:</strong>
+                Student
+            </p>
+
+        </div>
+
+
+        <a href="#login" class="logout">
+            Log Out
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     5. CONTACT PAGE
+===================================== -->
+
+<section id="contact">
+
+    <div class="form-box">
+
+        <h2>
+            Холбоо барих
+        </h2>
+
+        <p class="description">
+            Бидэнтэй холбогдох бол мэдээллээ оруулна уу.
+        </p>
+
+
+        <form>
+
+            <label>
+                Нэр
+            </label>
+
+            <input
+                type="text"
+                placeholder="Таны нэр"
+            >
+
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                placeholder="example@gmail.com"
+            >
+
+
+            <label>
+                Мессеж
+            </label>
+
+            <textarea
+                placeholder="Мессежээ бичнэ үү..."
+            ></textarea>
+
+
+            <button type="submit">
+                Илгээх
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+</body>
+</html>

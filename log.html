@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ажлын талбар</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#10142a;--panel:#171c38;--bd:#2a3057;--text:#f2efe6;--dim:#a8adc9;--accent:#e2b23c;--error:#e07a5f;--ok:#8fbf8f;--input:#0d1124;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html,body{min-height:100%;margin:0;font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+body{background-image:radial-gradient(circle at 15% 20%,rgba(226,178,60,.08),transparent 40%),radial-gradient(circle at 85% 80%,rgba(226,178,60,.06),transparent 45%)}
+h1,h2{font-family:'Fraunces',serif;margin:0}
+h1{font-size:1.7rem;font-weight:600}h2{font-size:1.15rem;font-weight:600;margin-bottom:14px}
+.sub{color:var(--dim);font-size:.92rem;margin:6px 0 28px}
+.hidden{display:none!important}
+a.link{color:var(--accent);text-decoration:none}a.link:hover{text-decoration:underline}
+/* login */
+#loginView{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.stage{width:100%;max-width:920px;display:grid;grid-template-columns:1.1fr 1fr;background:var(--panel);border:1px solid var(--bd);border-radius:4px;overflow:hidden;min-height:560px}
+.brand{padding:56px 48px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--bd);background:linear-gradient(180deg,rgba(226,178,60,.05),transparent 60%)}
+.mark{width:34px;height:34px;border:1.5px solid var(--accent);border-radius:50%;position:relative;flex:none}
+.mark::after{content:"";position:absolute;inset:8px;background:var(--accent);border-radius:50%}
+.brand-copy{font-family:'Fraunces',serif;font-size:2.1rem;line-height:1.25;max-width:22ch}
+.brand-copy em{font-style:italic;color:var(--accent)}
+.brand-foot{font-size:.85rem;color:var(--dim);line-height:1.6}
+.panel{padding:56px 48px;display:flex;flex-direction:column;justify-content:center}
+form{display:flex;flex-direction:column;gap:18px}
+label{font-size:.8rem;color:var(--dim);display:block;margin-bottom:6px}
+input[type=email],input[type=password],input[type=text],select{background:var(--input);border:1px solid var(--bd);border-radius:3px;padding:12px 14px;color:var(--text);font:inherit;font-size:.95rem;outline:none;width:100%;transition:border-color .15s}
+input:focus,select:focus{border-color:var(--accent)}
+.pw{position:relative}
+.pw button{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--dim);font-size:.78rem;cursor:pointer;padding:4px 6px}
+.row{display:flex;align-items:center;justify-content:space-between;font-size:.85rem}
+.remember{display:flex;align-items:center;gap:8px;color:var(--dim);margin:0;font-size:.85rem}
+.remember input{accent-color:var(--accent)}
+.btn{background:var(--accent);color:#1a1608;border:none;border-radius:3px;padding:12px 18px;font:inherit;font-size:.92rem;font-weight:600;cursor:pointer;transition:background .15s}
+.btn:hover{background:#eec25b}.btn:disabled{opacity:.6;cursor:default}
+.btn.ghost{background:none;color:var(--text);border:1px solid var(--bd)}.btn.ghost:hover{border-color:var(--accent);background:none}
+.msg{font-size:.85rem;min-height:1.2em}.msg.error{color:var(--error)}.msg.success{color:var(--ok)}
+.foot-note{margin-top:28px;font-size:.85rem;color:var(--dim);text-align:center}
+/* app shell */
+#appView{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+aside{background:var(--panel);border-right:1px solid var(--bd);padding:28px 20px;display:flex;flex-direction:column;gap:28px;position:sticky;top:0;height:100vh}
+.logo{display:flex;align-items:center;gap:12px;font-family:'Fraunces',serif;font-size:1.15rem}
+.logo .mark{width:26px;height:26px}.logo .mark::after{inset:6px}
+nav{display:flex;flex-direction:column;gap:4px;flex:1}
+nav a{color:var(--dim);text-decoration:none;padding:10px 12px;border-radius:3px;font-size:.92rem;border-left:2px solid transparent}
+nav a:hover{color:var(--text)}
+nav a.active{color:var(--text);background:rgba(226,178,60,.08);border-left-color:var(--accent)}
+main{padding:44px 48px;max-width:980px;width:100%}
+.page{display:none}.page.active{display:block}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.box{background:var(--panel);border:1px solid var(--bd);border-radius:4px;padding:22px}
+.stat b{display:block;font-family:'Fraunces',serif;font-size:2rem;font-weight:600;color:var(--accent)}
+.stat span{color:var(--dim);font-size:.85rem}
+.bars{display:flex;align-items:flex-end;gap:10px;height:140px;margin-top:6px}
+.bars div{flex:1;background:var(--accent);opacity:.85;border-radius:2px 2px 0 0;position:relative}
+.bars div span{position:absolute;bottom:-22px;left:0;right:0;text-align:center;font-size:.72rem;color:var(--dim)}
+.feed{list-style:none;margin:0;padding:0}
+.feed li{padding:12px 0;border-bottom:1px solid var(--bd);font-size:.9rem;display:flex;justify-content:space-between;gap:12px}
+.feed li:last-child{border:none}.feed small{color:var(--dim);white-space:nowrap}
+.add{display:flex;gap:10px;margin-bottom:18px}
+.tasks{list-style:none;margin:0;padding:0}
+.tasks li{display:flex;align-items:center;gap:12px;padding:14px 4px;border-bottom:1px solid var(--bd)}
+.tasks input{accent-color:var(--accent);width:18px;height:18px}
+.tasks .t{flex:1}.tasks li.done .t{text-decoration:line-through;color:var(--dim)}
+.tasks button{background:none;border:none;color:var(--dim);cursor:pointer;font-size:.8rem}.tasks button:hover{color:var(--error)}
+.filters{display:flex;gap:8px;margin-bottom:14px}
+.filters button{background:none;border:1px solid var(--bd);color:var(--dim);border-radius:3px;padding:6px 12px;font:inherit;font-size:.82rem;cursor:pointer}
+.filters button.on{border-color:var(--accent);color:var(--accent)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.avatar{width:72px;height:72px;border-radius:50%;background:var(--accent);color:#1a1608;display:grid;place-items:center;font-family:'Fraunces',serif;font-size:1.8rem;font-weight:600}
+.who{display:flex;align-items:center;gap:18px;margin-bottom:26px}
+.set{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--bd);gap:16px}
+.set:last-of-type{border:none}.set p{margin:2px 0 0;color:var(--dim);font-size:.85rem}
+.sw{appearance:none;width:42px;height:24px;border-radius:12px;background:var(--input);border:1px solid var(--bd);position:relative;cursor:pointer;flex:none;transition:background .15s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--dim);transition:transform .15s,background .15s}
+.sw:checked{background:rgba(226,178,60,.25);border-color:var(--accent)}.sw:checked::after{transform:translateX(18px);background:var(--accent)}
+button:focus-visible,input:focus-visible,a:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media(max-width:900px){#appView{grid-template-columns:1fr}
+aside{position:static;height:auto;flex-direction:row;align-items:center;padding:14px 16px;gap:12px;overflow-x:auto}
+.logo span{display:none}nav{flex-direction:row;flex:none}nav a{white-space:nowrap;border-left:none;border-bottom:2px solid transparent}nav a.active{border-bottom-color:var(--accent)}
+main{padding:28px 20px}.grid,.two{grid-template-columns:1fr}}
+@media(max-width:760px){.stage{grid-template-columns:1fr;min-height:0}.brand{display:none}.panel{padding:40px 28px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- 1. Нэвтрэх -->
+<div id="loginView">
+<div class="stage">
+  <div class="brand">
+    <div class="mark"></div>
+    <div class="brand-copy">Ажлаа <em>нэг цонхноос</em> удирдаарай.</div>
+    <div class="brand-foot">Аюулгүй нэвтрэлт. Таны мэдээлэл зөвхөн энэ төхөөрөмж дээр хадгалагдана.</div>
+  </div>
+  <div class="panel">
+    <h1>Тавтай морил</h1>
+    <p class="sub">Үргэлжлүүлэхийн тулд нэвтэрнэ үү.</p>
+    <form id="loginForm" novalidate>
+      <div><label for="email">Имэйл хаяг</label>
+      <input type="email" id="email" placeholder="name@example.com" autocomplete="email"></div>
+      <div><label for="password">Нууц үг</label>
+      <div class="pw"><input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+      <button type="button" id="pwToggle">ХАРУУЛАХ</button></div></div>
+      <div class="row">
+        <label class="remember"><input type="checkbox"> Намайг сана</label>
+        <a href="#" class="link" id="forgot">Нууц үг мартсан?</a>
+      </div>
+      <div class="msg" id="msg" role="status" aria-live="polite"></div>
+      <button type="submit" class="btn" id="submitBtn">Нэвтрэх</button>
+    </form>
+    <div class="foot-note">Хаяг байхгүй юу? <a href="#" class="link" id="signup">Бүртгүүлэх</a></div>
+  </div>
+</div>
+</div>
+
+<!-- Апп -->
+<div id="appView" class="hidden">
+<aside>
+  <div class="logo"><div class="mark"></div><span>Ажлын талбар</span></div>
+  <nav>
+    <a href="#dashboard" data-p="dashboard">Самбар</a>
+    <a href="#tasks" data-p="tasks">Даалгавар</a>
+    <a href="#profile" data-p="profile">Профайл</a>
+    <a href="#settings" data-p="settings">Тохиргоо</a>
+  </nav>
+</aside>
+<main>
+
+<!-- 2. Самбар -->
+<section class="page" id="dashboard">
+  <h1>Сайн байна уу, <span id="uname">Бат</span></h1>
+  <p class="sub">Энэ долоо хоногийн товч мэдээлэл.</p>
+  <div class="grid">
+    <div class="box stat"><b id="sOpen">0</b><span>Хийгдэж буй даалгавар</span></div>
+    <div class="box stat"><b id="sDone">0</b><span>Дууссан даалгавар</span></div>
+    <div class="box stat"><b>92%</b><span>Хугацаандаа биелүүлсэн</span></div>
+  </div>
+  <div class="two">
+    <div class="box"><h2>Өдөр тутмын гүйцэтгэл</h2>
+      <div class="bars" style="margin-bottom:28px">
+        <div style="height:45%"><span>Да</span></div><div style="height:70%"><span>Мя</span></div><div style="height:55%"><span>Лх</span></div>
+        <div style="height:90%"><span>Пү</span></div><div style="height:65%"><span>Ба</span></div><div style="height:30%"><span>Бя</span></div><div style="height:20%"><span>Ня</span></div>
+      </div></div>
+    <div class="box"><h2>Сүүлийн үйл явдал</h2>
+      <ul class="feed">
+        <li>Тайлан илгээгдлээ <small>10 мин</small></li>
+        <li>Уулзалт товлогдлоо <small>2 цаг</small></li>
+        <li>Гэрээ шинэчлэгдлээ <small>өчигдөр</small></li>
+        <li>Шинэ гишүүн нэмэгдлээ <small>2 өдөр</small></li>
+      </ul></div>
+  </div>
+</section>
+
+<!-- 3. Даалгавар -->
+<section class="page" id="tasks">
+  <h1>Даалгавар</h1>
+  <p class="sub">Хийх зүйлсээ нэмж, дуусмагц тэмдэглээрэй.</p>
+  <form class="add" id="taskForm">
+    <input type="text" id="taskInput" placeholder="Шинэй даалгавар бичих" aria-label="Шинэ даалгавар">
+    <button class="btn" type="submit">Нэмэх</button>
+  </form>
+  <div class="filters" id="filters">
+    <button data-f="all" class="on">Бүгд</button><button data-f="open">Хийгдэж буй</button><button data-f="done">Дууссан</button>
+  </div>
+  <ul class="tasks" id="taskList"></ul>
+</section>
+
+<!-- 4. Профайл -->
+<section class="page" id="profile">
+  <h1>Профайл</h1>
+  <p class="sub">Таны хувийн мэдээлэл.</p>
+  <div class="box">
+    <div class="who"><div class="avatar" id="avatar">Б</div>
+      <div><div style="font-weight:600" id="pName">Бат</div><div style="color:var(--dim);font-size:.88rem" id="pMail">bat@example.com</div></div></div>
+    <form id="profForm">
+      <div class="two">
+        <div><label for="fn">Нэр</label><input type="text" id="fn" value="Бат"></div>
+        <div><label for="role">Албан тушаал</label><input type="text" id="role" value="Төслийн менежер"></div>
+      </div>
+      <div><label for="lang">Хэл</label>
+        <select id="lang"><option>Монгол</option><option>English</option></select></div>
+      <div class="msg" id="pMsg" role="status" aria-live="polite"></div>
+      <div><button class="btn" type="submit">Өөрчлөлтийг хадгалах</button></div>
+    </form>
+  </div>
+</section>
+
+<!-- 5. Тохиргоо -->
+<section class="page" id="settings">
+  <h1>Тохиргоо</h1>
+  <p class="sub">Мэдэгдэл болон аюулгүй байдал.</p>
+  <div class="box">
+    <div class="set"><div><b>Имэйл мэдэгдэл</b><p>Шинэ даалгавар оноогдоход имэйл авах.</p></div><input type="checkbox" class="sw" checked aria-label="Имэйл мэдэгдэл"></div>
+    <div class="set"><div><b>Долоо хоногийн тайлан</b><p>Даваа гараг бүр гүйцэтгэлийн хураангуй илгээх.</p></div><input type="checkbox" class="sw" aria-label="Долоо хоногийн тайлан"></div>
+    <div class="set"><div><b>Хоёр шатлалт баталгаажуулалт</b><p>Нэвтрэх бүрд нэмэлт код шаардах.</p></div><input type="checkbox" class="sw" aria-label="Хоёр шатлалт баталгаажуулалт"></div>
+    <div class="set"><div><b>Гарах</b><p>Энэ төхөөрөмжөөс системээс гарах.</p></div><button class="btn ghost" id="logout">Гарах</button></div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const login=$('loginView'),app=$('appView'),msg=$('msg'),pw=$('password');
+let user={name:'Бат',email:'bat@example.com'},authed=false;
+let tasks=[{t:'Сарын тайлан бэлдэх',d:false},{t:'Багтай долоо хоногийн уулзалт хийх',d:false},{t:'Гэрээний төслийг хянах',d:true}];
+let filter='all';
+
+$('pwToggle').onclick=()=>{const h=pw.type==='password';pw.type=h?'text':'password';$('pwToggle').textContent=h?'НУУХ':'ХАРУУЛАХ'};
+
+$('loginForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const email=$('email').value.trim(),p=pw.value;
+  msg.className='msg';msg.textContent='';
+  const err=t=>{msg.textContent=t;msg.classList.add('error')};
+  if(!email||!p)return err('Имэйл болон нууц үгээ бөглөнө үү.');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return err('Имэйл хаягийн формат буруу байна.');
+  if(p.length<6)return err('Нууц үг дор хаяж 6 тэмдэгттэй байх ёстой.');
+  $('submitBtn').disabled=true;$('submitBtn').textContent='Нэвтэрч байна...';
+  setTimeout(()=>{
+    $('submitBtn').disabled=false;$('submitBtn').textContent='Нэвтрэх';
+    const n=email.split('@')[0];user={name:n.charAt(0).toUpperCase()+n.slice(1),email};
+    authed=true;fillUser();location.hash='dashboard';route();
+  },700);
+});
+$('forgot').onclick=e=>{e.preventDefault();msg.className='msg';msg.textContent='Сэргээх холбоосыг таны имэйлээр илгээх боломжтой (жишээ загвар).'};
+$('signup').onclick=e=>{e.preventDefault();msg.className='msg';msg.textContent='Бүртгүүлэх хэсэг энэ жишээ загварт ороогүй болно.'};
+
+function fillUser(){
+  $('uname').textContent=user.name;$('pName').textContent=user.name;$('pMail').textContent=user.email;
+  $('avatar').textContent=user.name.charAt(0).toUpperCase();$('fn').value=user.name;
+}
+function route(){
+  const h=location.hash.slice(1)||'dashboard';
+  const ok=['dashboard','tasks','profile','settings'].includes(h)?h:'dashboard';
+  login.classList.toggle('hidden',authed);app.classList.toggle('hidden',!authed);
+  if(!authed)return;
+  document.querySelectorAll('.page').forEach(s=>s.classList.toggle('active',s.id===ok));
+  document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('active',a.dataset.p===ok));
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',route);
+
+function renderTasks(){
+  const list=$('taskList');list.innerHTML='';
+  tasks.forEach((k,i)=>{
+    if(filter==='open'&&k.d||filter==='done'&&!k.d)return;
+    const li=document.createElement('li');if(k.d)li.className='done';
+    const c=document.createElement('input');c.type='checkbox';c.checked=k.d;c.setAttribute('aria-label',k.t);
+    c.onchange=()=>{k.d=c.checked;renderTasks()};
+    const s=document.createElement('span');s.className='t';s.textContent=k.t;
+    const b=document.createElement('button');b.textContent='Устгах';b.onclick=()=>{tasks.splice(i,1);renderTasks()};
+    li.append(c,s,b);list.append(li);
+  });
+  if(!list.children.length){const li=document.createElement('li');li.style.color='var(--dim)';li.textContent='Даалгавар алга. Дээрх талбарт шинээр нэмнэ үү.';list.append(li)}
+  $('sDone').textContent=tasks.filter(k=>k.d).length;$('sOpen').textContent=tasks.filter(k=>!k.d).length;
+}
+$('taskForm').onsubmit=e=>{e.preventDefault();const v=$('taskInput').value.trim();if(!v)return;tasks.unshift({t:v,d:false});$('taskInput').value='';renderTasks()};
+$('filters').onclick=e=>{const f=e.target.dataset.f;if(!f)return;filter=f;
+  document.querySelectorAll('#filters button').forEach(b=>b.classList.toggle('on',b===e.target));renderTasks()};
+
+$('profForm').onsubmit=e=>{e.preventDefault();
+  const n=$('fn').value.trim();if(!n){$('pMsg').className='msg error';$('pMsg').textContent='Нэрээ оруулна уу.';return}
+  user.name=n;fillUser();$('pMsg').className='msg success';$('pMsg').textContent='Өөрчлөлт хадгалагдлаа.'};
+
+$('logout').onclick=()=>{authed=false;pw.value='';msg.textContent='';location.hash='';route()};
+
+renderTasks();route();
+</script>
+</body>
+</html>

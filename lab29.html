@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Хэрэглэгчдийн мэдээлэл</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 50px;
+            font-family: Arial, sans-serif;
+            color: white;
+
+            /* Гоё хар фон */
+            background:
+                radial-gradient(circle at top left, #193b35, transparent 35%),
+                radial-gradient(circle at bottom right, #172c4a, transparent 35%),
+                #050505;
+        }
+
+        /* Гарчиг */
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 36px;
+            letter-spacing: 3px;
+            color: #00ffb3;
+            text-shadow: 0 0 15px #00ffb3;
+        }
+
+        .title p {
+            margin-top: 8px;
+            color: #aaa;
+            font-size: 16px;
+        }
+
+        /* Хүснэгт */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            overflow: hidden;
+
+            background: rgba(10, 10, 10, 0.9);
+
+            border: 2px solid #00ffb3;
+            border-radius: 18px;
+
+            box-shadow:
+                0 0 20px rgba(0, 255, 179, 0.25),
+                0 0 60px rgba(0, 255, 179, 0.08);
+        }
+
+        th,
+        td {
+            text-align: center;
+            border-right: 1px solid rgba(0, 255, 179, 0.45);
+            border-bottom: 1px solid rgba(0, 255, 179, 0.45);
+        }
+
+        th:last-child,
+        td:last-child {
+            border-right: none;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Гарчгийн мөр */
+        th {
+            height: 70px;
+            padding: 15px;
+
+            font-size: 19px;
+            letter-spacing: 1px;
+
+            color: #00ffb3;
+
+            background: linear-gradient(
+                135deg,
+                rgba(0, 255, 179, 0.12),
+                rgba(0, 255, 179, 0.03)
+            );
+        }
+
+        /* Хэрэглэгчийн мөр */
+        td {
+            height: 230px;
+            padding: 20px;
+
+            transition: 0.3s;
+        }
+
+        tr:not(:first-child):hover td {
+            background: rgba(0, 255, 179, 0.06);
+        }
+
+        /* Баганын өргөн */
+        th:nth-child(1),
+        td:nth-child(1) {
+            width: 6%;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2) {
+            width: 18%;
+        }
+
+        th:nth-child(3),
+        td:nth-child(3) {
+            width: 36%;
+        }
+
+        th:nth-child(4),
+        td:nth-child(4) {
+            width: 40%;
+        }
+
+        /* № */
+        .number {
+            font-size: 25px;
+            font-weight: bold;
+            color: #00ffb3;
+            text-shadow: 0 0 10px #00ffb3;
+        }
+
+        /* Зураг */
+        .image-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 130px;
+            height: 160px;
+
+            object-fit: cover;
+
+            border-radius: 15px;
+
+            border: 3px solid #00ffb3;
+
+            box-shadow:
+                0 0 15px rgba(0, 255, 179, 0.5);
+
+            transition: 0.4s;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.08);
+
+            box-shadow:
+                0 0 25px rgba(0, 255, 179, 0.9);
+        }
+
+        /* Нэр */
+        .name {
+            font-size: 25px;
+            font-weight: bold;
+
+            color: white;
+
+            text-shadow:
+                0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Дуртай зүйлс */
+        .likes {
+            display: inline-block;
+
+            text-align: left;
+
+            font-size: 19px;
+            font-weight: bold;
+
+            line-height: 2;
+
+            color: #ddd;
+        }
+
+        .likes span {
+            color: #00ffb3;
+            margin-right: 8px;
+        }
+
+        /* 2 дахь хүний нэр */
+        .second-name {
+            color: #7dd3fc;
+            text-shadow: 0 0 12px rgba(125, 211, 252, 0.5);
+        }
+
+        /* Гар утсанд */
+        @media (max-width: 800px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .title h1 {
+                font-size: 25px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th {
+                font-size: 13px;
+            }
+
+            td {
+                height: 180px;
+                padding: 10px;
+            }
+
+            .profile-img {
+                width: 90px;
+                height: 120px;
+            }
+
+            .name {
+                font-size: 17px;
+            }
+
+            .likes {
+                font-size: 14px;
+            }
+
+            .number {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Гарчиг -->
+    <div class="title">
+        <h1>✨ ХЭРЭГЛЭГЧДИЙН МЭДЭЭЛЭЛ ✨</h1>
+        <p>Манай хэрэглэгчдийн танилцуулга</p>
+    </div>
+
+
+    <table>
+
+        <!-- Толгой -->
+        <tr>
+            <th>№</th>
+            <th>ЦЭЭЖ ЗУРАГ</th>
+            <th>ХЭРЭГЛЭГЧИЙН НЭР</th>
+            <th>ХИЙХ ДУРТАЙ ЗҮЙЛС</th>
+        </tr>
+
+
+        <!-- 1-р хүн -->
+        <tr>
+
+            <td class="number">
+                01
+            </td>
+
+            <td>
+                <div class="image-box">
+                    <img
+                        src="web/nomi.png"
+                        alt="Батдэлгэр Номинчимэг"
+                        class="profile-img"
+                    >
+                </div>
+            </td>
+
+            <td class="name">
+                БАТДЭЛГЭР НОМИНЧИМЭГ
+            </td>
+
+            <td>
+                <div class="likes">
+                    <span>★</span> ДУУ СОНСОХ<br>
+                    <span>★</span> КИНО ҮЗЭХ<br>
+                    <span>★</span> АЯЛАХ
+                </div>
+            </td>
+
+        </tr>
+
+
+        <!-- 2-р хүн -->
+        <tr>
+
+            <td class="number">
+                02
+            </td>
+
+            <td>
+                <div class="image-box">
+                    <img
+                        src="web/jinu.png"
+                        alt="Тэмүүлэн Анужин"
+                        class="profile-img"
+                    >
+                </div>
+            </td>
+
+            <td class="name second-name">
+                ТЭМҮҮЛЭН АНУЖИН
+            </td>
+
+            <td>
+                <div class="likes">
+                    <span>★</span> ЗУРАГ АВАХ<br>
+                    <span>★</span> КОФЕ УУХ<br>
+                    <span>★</span> КИНО ҮЗЭХ<br>
+                    <span>★</span> НАЙЗУУДТАЙГАА АЯЛАХ
+                </div>
+            </td>
+
+        </tr>
+
+    </table>
+
+</body>
+</html> 

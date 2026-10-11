@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Хэрэглэгчдийн мэдээлэл</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 50px 6%;
+            font-family: Arial, sans-serif;
+            color: white;
+
+            background:
+                radial-gradient(circle at 10% 10%, #173f38 0%, transparent 30%),
+                radial-gradient(circle at 90% 90%, #182f50 0%, transparent 30%),
+                linear-gradient(135deg, #020303, #07100f, #020303);
+
+            overflow-x: hidden;
+        }
+
+        /* Дээд гэрэлтсэн хэсэг */
+        body::before {
+            content: "";
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            top: -150px;
+            right: -100px;
+            background: #00ffb3;
+            filter: blur(180px);
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        /* Гарчиг */
+        .title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .title h1 {
+            font-size: 38px;
+            letter-spacing: 4px;
+            color: #00ffb3;
+
+            text-shadow:
+                0 0 8px #00ffb3,
+                0 0 25px rgba(0,255,179,.5);
+
+            animation: glow 2s infinite alternate;
+        }
+
+        .title p {
+            margin-top: 12px;
+            color: #9ca3af;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 8px #00ffb3;
+            }
+
+            to {
+                text-shadow:
+                    0 0 15px #00ffb3,
+                    0 0 35px #00ffb3;
+            }
+        }
+
+        /* Хүснэгт */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            overflow: hidden;
+
+            background: rgba(8, 15, 14, 0.78);
+
+            border: 1px solid rgba(0,255,179,.5);
+            border-radius: 25px;
+
+            box-shadow:
+                0 0 25px rgba(0,255,179,.12),
+                0 25px 80px rgba(0,0,0,.5);
+
+            backdrop-filter: blur(15px);
+        }
+
+        th,
+        td {
+            text-align: center;
+
+            border-right: 1px solid rgba(0,255,179,.18);
+            border-bottom: 1px solid rgba(0,255,179,.18);
+        }
+
+        th:last-child,
+        td:last-child {
+            border-right: none;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Толгой */
+        th {
+            height: 70px;
+            padding: 15px;
+
+            font-size: 17px;
+            letter-spacing: 2px;
+
+            color: #00ffb3;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0,255,179,.14),
+                    rgba(0,255,179,.03)
+                );
+        }
+
+        /* Мөр */
+        td {
+            height: 250px;
+            padding: 25px;
+
+            transition: all .4s ease;
+        }
+
+        tr:not(:first-child) {
+            transition: all .4s ease;
+        }
+
+        tr:not(:first-child):hover {
+            transform: scale(1.008);
+        }
+
+        tr:not(:first-child):hover td {
+            background: rgba(0,255,179,.055);
+        }
+
+        /* Баганын хэмжээ */
+        th:nth-child(1),
+        td:nth-child(1) {
+            width: 7%;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2) {
+            width: 20%;
+        }
+
+        th:nth-child(3),
+        td:nth-child(3) {
+            width: 33%;
+        }
+
+        th:nth-child(4),
+        td:nth-child(4) {
+            width: 40%;
+        }
+
+        /* № */
+        .number {
+            font-size: 26px;
+            font-weight: bold;
+
+            color: #00ffb3;
+
+            text-shadow:
+                0 0 10px #00ffb3;
+        }
+
+        /* Зураг */
+        .image-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 135px;
+            height: 170px;
+
+            object-fit: cover;
+
+            border-radius: 20px;
+
+            border: 2px solid #00ffb3;
+
+            padding: 4px;
+
+            background: rgba(0,255,179,.05);
+
+            box-shadow:
+                0 0 15px rgba(0,255,179,.35);
+
+            transition:
+                transform .4s ease,
+                box-shadow .4s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1) rotate(1deg);
+
+            box-shadow:
+                0 0 20px rgba(0,255,179,.7),
+                0 0 45px rgba(0,255,179,.25);
+        }
+
+        /* Нэр */
+        .name {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+
+            color: #ffffff;
+
+            text-shadow:
+                0 0 12px rgba(255,255,255,.2);
+
+            transition: .3s;
+        }
+
+        td:hover .name {
+            letter-spacing: 2px;
+        }
+
+        /* 2 дахь хүний нэр */
+        .second-name {
+            color: #7dd3fc;
+
+            text-shadow:
+                0 0 12px rgba(125,211,252,.5);
+        }
+
+        /* Дуртай зүйлс */
+        .likes {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            align-items: flex-start;
+
+            width: fit-content;
+            margin: auto;
+
+            font-size: 17px;
+            font-weight: bold;
+            color: #d1d5db;
+        }
+
+        .likes-item {
+            padding: 8px 15px;
+
+            border: 1px solid rgba(0,255,179,.2);
+            border-radius: 12px;
+
+            background: rgba(0,255,179,.035);
+
+            transition: .3s;
+        }
+
+        .likes-item:hover {
+            transform: translateX(8px);
+
+            border-color: rgba(0,255,179,.6);
+
+            background: rgba(0,255,179,.1);
+
+            box-shadow:
+                0 0 15px rgba(0,255,179,.12);
+
+            color: white;
+        }
+
+        .likes span {
+            color: #00ffb3;
+            margin-right: 8px;
+
+            text-shadow:
+                0 0 8px #00ffb3;
+        }
+
+        /* Доод хэсэг */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+
+            color: #667085;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        /* Гар утас */
+        @media (max-width: 800px) {
+
+            body {
+                padding: 25px 12px;
+            }
+
+            .title {
+                margin-bottom: 25px;
+            }
+
+            .title h1 {
+                font-size: 23px;
+                letter-spacing: 2px;
+            }
+
+            .title p {
+                font-size: 13px;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            th {
+                height: 55px;
+                font-size: 12px;
+                padding: 10px;
+            }
+
+            td {
+                height: 190px;
+                padding: 12px;
+            }
+
+            .profile-img {
+                width: 95px;
+                height: 125px;
+            }
+
+            .name {
+                font-size: 16px;
+            }
+
+            .likes {
+                font-size: 13px;
+            }
+
+            .likes-item {
+                padding: 6px 10px;
+            }
+
+            .number {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Гарчиг -->
+    <div class="title">
+        <h1>✨ ХЭРЭГЛЭГЧДИЙН МЭДЭЭЛЭЛ ✨</h1>
+        <p>Манай хэрэглэгчдийн танилцуулга</p>
+    </div>
+
+
+    <!-- Хүснэгт -->
+    <table>
+
+        <!-- Толгой -->
+        <tr>
+            <th>№</th>
+            <th>ЦЭЭЖ ЗУРАГ</th>
+            <th>ХЭРЭГЛЭГЧИЙН НЭР</th>
+            <th>ХИЙХ ДУРТАЙ ЗҮЙЛС</th>
+        </tr>
+
+
+        <!-- 1-р хүн -->
+        <tr>
+
+            <td class="number">
+                01
+            </td>
+
+            <td>
+                <div class="image-box">
+                    <img
+                        src="nomi.png"
+                        alt="Батдэлгэр Номинчимэг"
+                        class="profile-img"
+                    >
+                </div>
+            </td>
+
+            <td class="name">
+                БАТДЭЛГЭР НОМИНЧИМЭГ
+            </td>
+
+            <td>
+                <div class="likes">
+
+                    <div class="likes-item">
+                        <span>★</span>
+                        ДУУ СОНСОХ
+                    </div>
+
+                    <div class="likes-item">
+                        <span>★</span>
+                        КИНО ҮЗЭХ
+                    </div>
+
+                    <div class="likes-item">
+                        <span>★</span>
+                        АЯЛАХ
+                    </div>
+
+                </div>
+            </td>
+
+        </tr>
+
+
+        <!-- 2-р хүн -->
+        <tr>
+
+            <td class="number">
+                02
+            </td>
+
+            <td>
+                <div class="image-box">
+                    <img
+                        src="web/jinu.png"
+                        alt="Тэмүүлэн Анужин"
+                        class="profile-img"
+                    >
+                </div>
+            </td>
+
+            <td class="name second-name">
+                ТЭМҮҮЛЭН АНУЖИН
+            </td>
+
+            <td>
+                <div class="likes">
+
+                    <div class="likes-item">
+                        <span>★</span>
+                        ЗУРАГ АВАХ
+                    </div>
+
+                    <div class="likes-item">
+                        <span>★</span>
+                        КОФЕ УУХ
+                    </div>
+
+                    <div class="likes-item">
+                        <span>★</span>
+                        КИНО ҮЗЭХ
+                    </div>
+
+                    <div class="likes-item">
+                        <span>★</span>
+                        НАЙЗУУДТАЙГАА АЯЛАХ
+                    </div>
+
+                </div>
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <div class="footer">
+        © 2026 • Хэрэглэгчдийн мэдээлэл
+    </div>
+
+</body>
+</html>

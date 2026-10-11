@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Flexbox туршилт</title>
+
+    <style>
+
+        /* =====================================================
+           1. FLEX CONTAINER
+           
+           Flex container гэдэг нь display: flex шинж чанар
+           өгсөн гаднах DIV элемент юм.
+
+           Доторх элементүүдийг flex item гэж нэрлэнэ.
+        ===================================================== */
+
+        .container {
+            display: flex;
+
+            background-color: #eeeeee;
+            border: 2px solid black;
+            padding: 20px;
+
+            gap: 10px;
+        }
+
+
+        /* =====================================================
+           2. FLEX ITEM
+           
+           Flex container-ийн шууд дотор байрлаж байгаа
+           элементүүдийг flex item гэж нэрлэнэ.
+        ===================================================== */
+
+        .item {
+            width: 100px;
+            height: 100px;
+
+            background-color: #00ff99;
+            border: 2px solid black;
+
+            /* Текстийг төвд байрлуулах */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           3. DISPLAY: FLEX
+           
+           display: flex;
+           гэсэн код нь DIV элементийг flex container
+           болгон хувиргана.
+
+           Ингэснээр доторх элементүүдийг Flexbox-ийн
+           тусламжтайгаар байрлуулж болно.
+        ===================================================== */
+
+        .display-flex {
+            display: flex;
+
+            background-color: #d9f9ff;
+            padding: 20px;
+            gap: 10px;
+        }
+
+
+        /* =====================================================
+           4. FLEX-DIRECTION: ROW
+           
+           row нь Flexbox-ийн үндсэн чиглэл.
+
+           Элементүүд зүүнээс баруун тийш
+           хэвтээ байрлана.
+        ===================================================== */
+
+        .direction-row {
+            display: flex;
+
+            flex-direction: row;
+
+            gap: 10px;
+            padding: 20px;
+            background-color: #e8e8ff;
+        }
+
+
+        /* =====================================================
+           5. FLEX-DIRECTION: COLUMN
+           
+           column нь элементүүдийг дээрээс доош
+           босоо чиглэлд байрлуулна.
+        ===================================================== */
+
+        .direction-column {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+            padding: 20px;
+            background-color: #ffe8f0;
+        }
+
+
+        /* =====================================================
+           6. FLEX-DIRECTION: ROW-REVERSE
+           
+           row-reverse нь row-ийн эсрэг чиглэл.
+
+           Элементүүд баруунаас зүүн тийш байрлана.
+        ===================================================== */
+
+        .direction-row-reverse {
+            display: flex;
+
+            flex-direction: row-reverse;
+
+            gap: 10px;
+            padding: 20px;
+            background-color: #fff0d9;
+        }
+
+
+        /* =====================================================
+           7. FLEX-DIRECTION: COLUMN-REVERSE
+           
+           column-reverse нь column-ийн эсрэг чиглэл.
+
+           Элементүүд доороос дээш байрлана.
+        ===================================================== */
+
+        .direction-column-reverse {
+            display: flex;
+
+            flex-direction: column-reverse;
+
+            gap: 10px;
+            padding: 20px;
+            background-color: #e8ffe8;
+        }
+
+
+        /* =====================================================
+           8. GAP
+           
+           gap нь Flex item-үүдийн хооронд зай үүсгэнэ.
+
+           Жишээ:
+           gap: 20px;
+           гэвэл элементүүдийн хооронд 20px зай гарна.
+        ===================================================== */
+
+        .gap-example {
+            display: flex;
+
+            gap: 20px;
+
+            padding: 20px;
+            background-color: #eeeeee;
+        }
+
+
+        /* =====================================================
+           9. JUSTIFY-CONTENT
+           
+           justify-content нь үндсэн тэнхлэгийн дагуу
+           элементүүдийг байрлуулна.
+
+           center = голд байрлуулна.
+        ===================================================== */
+
+        .justify-example {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            padding: 20px;
+            background-color: #ddddff;
+        }
+
+
+        /* =====================================================
+           10. ALIGN-ITEMS
+           
+           align-items нь хөндлөн тэнхлэгийн дагуу
+           элементүүдийг байрлуулна.
+
+           center = босоо чиглэлд голлуулна.
+        ===================================================== */
+
+        .align-example {
+            display: flex;
+
+            align-items: center;
+
+            height: 180px;
+
+            gap: 10px;
+
+            padding: 20px;
+            background-color: #ffe0e0;
+        }
+
+
+        /* Гарчгийн дизайн */
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 30px;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS FLEXBOX ТУРШИЛТ</h1>
+
+
+    <!-- =====================================================
+         FLEX CONTAINER + FLEX ITEM
+    ====================================================== -->
+
+    <h2>1. Flex Container ба Flex Item</h2>
+
+    <p>
+        Гаднах DIV нь Flex Container,
+        доторх DIV-үүд нь Flex Item болно.
+    </p>
+
+    <div class="container">
+
+        <div class="item">Item 1</div>
+        <div class="item">Item 2</div>
+        <div class="item">Item 3</div>
+
+    </div>
+
+
+    <!-- =====================================================
+         DISPLAY: FLEX
+    ====================================================== -->
+
+    <h2>2. display: flex</h2>
+
+    <p>
+        display: flex өгсөнөөр тухайн DIV
+        Flex Container болно.
+    </p>
+
+    <div class="display-flex">
+
+        <div class="item">A</div>
+        <div class="item">B</div>
+        <div class="item">C</div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FLEX-DIRECTION: ROW
+    ====================================================== -->
+
+    <h2>3. flex-direction: row</h2>
+
+    <p>
+        row нь элементүүдийг зүүнээс баруун тийш
+        хэвтээ чиглэлд байрлуулна.
+    </p>
+
+    <div class="direction-row">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FLEX-DIRECTION: COLUMN
+    ====================================================== -->
+
+    <h2>4. flex-direction: column</h2>
+
+    <p>
+        column нь элементүүдийг дээрээс доош
+        босоо чиглэлд байрлуулна.
+    </p>
+
+    <div class="direction-column">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FLEX-DIRECTION: ROW-REVERSE
+    ====================================================== -->
+
+    <h2>5. flex-direction: row-reverse</h2>
+
+    <p>
+        row-reverse нь элементүүдийг баруунаас зүүн
+        тийш эсрэг чиглэлд байрлуулна.
+    </p>
+
+    <div class="direction-row-reverse">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FLEX-DIRECTION: COLUMN-REVERSE
+    ====================================================== -->
+
+    <h2>6. flex-direction: column-reverse</h2>
+
+    <p>
+        column-reverse нь элементүүдийг доороос дээш
+        эсрэг чиглэлд байрлуулна.
+    </p>
+
+    <div class="direction-column-reverse">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+    </div>
+
+
+    <!-- =====================================================
+         GAP
+    ====================================================== -->
+
+    <h2>7. gap</h2>
+
+    <p>
+        gap нь Flex item-үүдийн хооронд зай гаргана.
+    </p>
+
+    <div class="gap-example">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JUSTIFY-CONTENT
+    ====================================================== -->
+
+    <h2>8. justify-content: center</h2>
+
+    <p>
+        justify-content нь үндсэн тэнхлэгийн дагуу
+        элементүүдийг байрлуулна.
+    </p>
+
+    <div class="justify-example">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ALIGN-ITEMS
+    ====================================================== -->
+
+    <h2>9. align-items: center</h2>
+
+    <p>
+        align-items нь хөндлөн тэнхлэгийн дагуу
+        элементүүдийг байрлуулна.
+    </p>
+
+    <div class="align-example">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+    </div>
+
+
+</body>
+</html>
+```

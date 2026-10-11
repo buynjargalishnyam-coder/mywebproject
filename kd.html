@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KIMDOG HOUSE</title>
+
+    <style>
+
+        /* =====================================
+           ҮНДСЭН ТОХИРГОО
+        ===================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #ff4b00;
+            color: white;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        /* =====================================
+           HEADER
+        ===================================== */
+
+        header {
+            background: #590505;
+
+            width: 100%;
+
+            padding: 20px 6%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+        }
+
+
+        /* LOGO */
+
+        .logo {
+            color: #ff4b00;
+
+            font-size: 27px;
+
+            font-weight: bold;
+
+            line-height: 0.9;
+
+            text-align: center;
+        }
+
+
+        /* NAVIGATION */
+
+        nav {
+            display: flex;
+
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffb000;
+        }
+
+
+        /* =====================================
+           НҮҮРНИЙ ХЭСЭГ
+        ===================================== */
+
+        .hero {
+            width: 90%;
+
+            max-width: 1200px;
+
+            min-height: 600px;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 40px;
+        }
+
+
+        .hero-text {
+            width: 50%;
+        }
+
+
+        .hero-text h1 {
+            color: #590505;
+
+            font-size: 70px;
+
+            line-height: 0.9;
+
+            margin-bottom: 25px;
+        }
+
+
+        .hero-text p {
+            font-size: 20px;
+
+            line-height: 1.5;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* НҮҮРНИЙ ЗУРАГ */
+
+        .hero-image {
+            width: 45%;
+        }
+
+
+        .hero-image img {
+            width: 100%;
+
+            height: 450px;
+
+            object-fit: cover;
+
+            border-radius: 25px;
+
+            border: 8px solid #590505;
+        }
+
+
+        /* =====================================
+           BUTTON
+        ===================================== */
+
+        .button {
+            display: inline-block;
+
+            background: #590505;
+
+            color: white;
+
+            padding: 14px 25px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+
+        .button:hover {
+            background: #ffb000;
+
+            color: #590505;
+        }
+
+
+        /* =====================================
+           ОНЦЛОХ ХООЛ
+        ===================================== */
+
+        .foods {
+            width: 90%;
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 50px 0;
+        }
+
+
+        .foods h2 {
+            color: #590505;
+
+            text-align: center;
+
+            font-size: 40px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .food-container {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .food-card {
+            background: #590505;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            transition: 0.3s;
+        }
+
+
+        .food-card:hover {
+            transform: translateY(-8px);
+        }
+
+
+        .food-card h3 {
+            color: #ffb000;
+
+            font-size: 24px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .food-card p {
+            line-height: 1.5;
+
+            margin-bottom: 15px;
+        }
+
+
+        .food-card b {
+            color: #ffb000;
+
+            font-size: 20px;
+        }
+
+
+        /* =====================================
+           ЕРӨНХИЙ PAGE
+        ===================================== */
+
+        .page {
+            width: 90%;
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 60px 0;
+        }
+
+
+        .page > h1 {
+            text-align: center;
+
+            color: #590505;
+
+            font-size: 40px;
+
+            margin-bottom: 40px;
+        }
+
+
+        /* =====================================
+           MENU
+        ===================================== */
+
+        .menu-container {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+
+        .menu-card {
+            background: #590505;
+
+            padding: 15px;
+
+            border-radius: 15px;
+
+            transition: 0.3s;
+        }
+
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+
+        .menu-card img {
+            width: 100%;
+
+            height: 200px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+        }
+
+
+        .menu-card h2 {
+            color: #ffb000;
+
+            margin: 15px 0 8px;
+        }
+
+
+        .menu-card p {
+            line-height: 1.5;
+
+            margin-bottom: 10px;
+        }
+
+
+        .menu-card strong {
+            display: block;
+
+            color: #ffb000;
+
+            font-size: 20px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =====================================
+           FORM
+        ===================================== */
+
+        .form-page {
+            min-height: 700px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .form-box {
+            background: #590505;
+
+            width: 90%;
+
+            max-width: 500px;
+
+            padding: 35px;
+
+            border-radius: 20px;
+        }
+
+
+        .form-box h1 {
+            text-align: center;
+
+            color: #ffb000;
+
+            margin-bottom: 25px;
+        }
+
+
+        label {
+            display: block;
+
+            margin-top: 15px;
+
+            margin-bottom: 7px;
+
+            font-weight: bold;
+        }
+
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+
+            outline: none;
+        }
+
+
+        textarea {
+            height: 110px;
+
+            resize: none;
+        }
+
+
+        .form-box button,
+        .login-box button {
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #ff4b00;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .form-box button:hover,
+        .login-box button:hover {
+            background: #ffb000;
+
+            color: #590505;
+        }
+
+
+        /* =====================================
+           БИДНИЙ ТУХАЙ
+        ===================================== */
+
+        .about {
+            width: 90%;
+
+            max-width: 900px;
+
+            margin: auto;
+
+            padding: 60px 0;
+
+            min-height: 650px;
+        }
+
+
+        .about > h1 {
+            text-align: center;
+
+            color: #590505;
+
+            margin-bottom: 40px;
+        }
+
+
+        .about-box {
+            background: #590505;
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            line-height: 1.8;
+        }
+
+
+        .about-box h2 {
+            color: #ffb000;
+
+            margin-bottom: 20px;
+        }
+
+
+        .about-box h3 {
+            color: #ffb000;
+
+            margin-top: 20px;
+        }
+
+
+        .about-box ul {
+            margin-left: 25px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =====================================
+           LOGIN
+        ===================================== */
+
+        .login-page {
+            min-height: 700px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+        }
+
+
+        .login-box {
+            width: 90%;
+
+            max-width: 450px;
+
+            background: #590505;
+
+            padding: 40px;
+
+            border-radius: 25px;
+
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+
+        .login-box h1 {
+            color: #ff4b00;
+
+            text-align: center;
+
+            font-size: 40px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .login-text {
+            text-align: center;
+
+            margin-bottom: 25px;
+        }
+
+
+        .remember {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 15px;
+        }
+
+
+        .remember input {
+            width: auto;
+        }
+
+
+        .register-text {
+            text-align: center;
+
+            margin-top: 20px;
+        }
+
+
+        .register-text a {
+            color: #ffb000;
+
+            font-weight: bold;
+
+            text-decoration: none;
+        }
+
+
+        .register-text a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =====================================
+           FOOTER
+        ===================================== */
+
+        footer {
+            background: #590505;
+
+            text-align: center;
+
+            padding: 25px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================
+           MOBILE
+        ===================================== */
+
+        @media (max-width: 800px) {
+
+            header {
+                flex-direction: column;
+
+                gap: 20px;
+            }
+
+
+            nav {
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+
+            .hero {
+                flex-direction: column;
+
+                padding: 50px 0;
+            }
+
+
+            .hero-text {
+                width: 100%;
+
+                text-align: center;
+            }
+
+
+            .hero-image {
+                width: 100%;
+            }
+
+
+            .hero-text h1 {
+                font-size: 48px;
+            }
+
+
+            .food-container {
+                grid-template-columns: 1fr;
+            }
+
+
+            .menu-container {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
+<header>
+
+    <div class="logo">
+        KIMDOG<br>
+        HOUSE
+    </div>
+
+
+    <nav>
+
+        <a href="#home">
+            НҮҮР
+        </a>
+
+        <a href="#menu">
+            МЕНЮ
+        </a>
+
+        <a href="#order">
+            ЗАХИАЛГА
+        </a>
+
+        <a href="#about">
+            БИДНИЙ ТУХАЙ
+        </a>
+
+        <a href="#login">
+            НЭВТРЭХ
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ==================================================
+     1. HOME
+================================================== -->
+
+<section id="home" class="hero">
+
+
+    <div class="hero-text">
+
+        <h1>
+            KIMDOG<br>
+            HOUSE
+        </h1>
+
+
+        <p>
+            Солонгосын амттай,
+            халуун, шинэхэн хоолыг
+            Монголд хүргэж байна.
+        </p>
+
+
+        <a href="#menu" class="button">
+            МЕНЮ ҮЗЭХ
+        </a>
+
+    </div>
+
+
+
+    <div class="hero-image">
+
+        <!-- food.jpg гэдэг зураг index.html-тэй
+             нэг folder-т байх ёстой -->
+
+        <img
+            src="kdmenu2.jpg"
+            alt="Korean Food"
+        >
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     2. FEATURED FOOD
+================================================== -->
+
+<section class="foods">
+
+    <h2>
+        ОНЦЛОХ ХООЛ
+    </h2>
+
+
+    <div class="food-container">
+
+
+        <div class="food-card">
+             <img src="dogg.jpg">
+
+            <h3>
+                Tteokbokki
+            </h3>
+
+            <p>
+                Халуун ногоотой
+                солонгос будааны бялуу.
+            </p>
+
+            <b>
+                12,000₮
+            </b>
+
+        </div>
+
+
+
+        <div class="food-card">
+            <img src="chicken.jpg">
+
+
+            <h3>
+                Korean Chicken
+            </h3>
+
+            <p>
+                Шаржигнуур тахиа,
+                амтат соустай.
+            </p>
+
+            <b>
+                18,000₮
+            </b>
+
+        </div>
+
+
+
+        <div class="food-card">
+            <img src="ramyeon.jpg">
+
+
+            <h3>
+                Ramyeon
+            </h3>
+
+            <p>
+                Өндөг болон ногоотой
+                халуун рамён.
+            </p>
+
+            <b>
+                10,000₮
+            </b>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     3. MENU
+================================================== -->
+
+<section id="menu" class="page">
+
+    <h1>
+        МАНАЙ МЕНЮ
+    </h1>
+
+
+    <div class="menu-container">
+
+
+        <div class="menu-card">
+
+            <img src="dogg.jpg">
+
+            <h2>
+                Tteokbokki
+            </h2>
+
+            <p>
+                Халуун ногоотой
+                будааны бялуу.
+            </p>
+
+            <strong>
+                12,000₮
+            </strong>
+
+            <a href="#order" class="button">
+                ЗАХИАЛАХ
+            </a>
+
+        </div>
+
+
+
+        <div class="menu-card">
+
+            <img src="chicken.jpg">
+
+            <h2>
+                Korean Chicken
+            </h2>
+
+            <p>
+                Шаржигнуур
+                солонгос тахиа.
+            </p>
+
+            <strong>
+                18,000₮
+            </strong>
+
+            <a href="#order" class="button">
+                ЗАХИАЛАХ
+            </a>
+
+        </div>
+
+
+
+        <div class="menu-card">
+
+            <img src="jjang.jpg">
+
+            <h2>
+                Jajangmyeon
+            </h2>
+
+            <p>
+                Хар буурцагны
+                соустай гоймон.
+            </p>
+
+            <strong>
+                15,000₮
+            </strong>
+
+            <a href="#order" class="button">
+                ЗАХИАЛАХ
+            </a>
+
+        </div>
+
+
+
+        <div class="menu-card">
+
+            <img src="ramen.jpg">
+
+            <h2>
+                Ramyeon
+            </h2>
+
+            <p>
+                Өндөгтэй халуун
+                рамен.
+            </p>
+
+            <strong>
+                10,000₮
+            </strong>
+
+            <a href="#order" class="button">
+                ЗАХИАЛАХ
+            </a>
+
+        </div>
+
+
+
+        <div class="menu-card">
+
+            <img src="bulgogi.jpg">
+
+            <h2>
+                Bulgogi
+            </h2>
+
+            <p>
+                Амталсан
+                солонгос мах.
+            </p>
+
+            <strong>
+                20,000₮
+            </strong>
+
+            <a href="#order" class="button">
+                ЗАХИАЛАХ
+            </a>
+
+        </div>
+
+
+
+        <div class="menu-card">
+
+            <img src="kimbap.jpg">
+
+            <h2>
+                Kimbap
+            </h2>
+
+            <p>
+                Мах, ногоотой
+                солонгос ороомог.
+            </p>
+
+            <strong>
+                9,000₮
+            </strong>
+
+            <a href="#order" class="button">
+                ЗАХИАЛАХ
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     4. ORDER
+================================================== -->
+
+<section id="order" class="form-page">
+
+    <div class="form-box">
+
+        <h1>
+            ХООЛ ЗАХИАЛАХ
+        </h1>
+
+
+        <form>
+
+
+            <label>
+                Нэр
+            </label>
+
+            <input
+                type="text"
+                placeholder="Нэрээ оруулна уу"
+                required
+            >
+
+
+
+            <label>
+                Утас
+            </label>
+
+            <input
+                type="tel"
+                placeholder="90092299"
+                required
+            >
+
+
+
+            <label>
+                Хоол сонгох
+            </label>
+
+            <select>
+
+                <option>
+                    Tteokbokki
+                </option>
+
+                <option>
+                    Korean Chicken
+                </option>
+
+                <option>
+                    Jajangmyeon
+                </option>
+
+                <option>
+                    Ramyeon
+                </option>
+
+                <option>
+                    Bulgogi
+                </option>
+
+                <option>
+                    Kimbap
+                </option>
+
+            </select>
+
+
+
+            <label>
+                Тоо ширхэг
+            </label>
+
+            <input
+                type="number"
+                value="1"
+                min="1"
+            >
+
+
+
+            <label>
+                Хүргэлтийн хаяг
+            </label>
+
+            <textarea
+                placeholder="Хаягаа оруулна уу">
+            </textarea>
+
+
+
+            <button type="submit">
+                ЗАХИАЛГА ИЛГЭЭХ
+            </button>
+
+
+        </form>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     5. ABOUT
+================================================== -->
+
+<section id="about" class="about">
+
+    <h1>
+        БИДНИЙ ТУХАЙ
+    </h1>
+
+
+    <div class="about-box">
+
+
+        <h2>
+            KIMBOGGI HOUSE
+        </h2>
+
+
+        <p>
+            KIMBOGGI HOUSE нь Монголд
+            солонгос хоолны амтыг хүргэх
+            зорилготой хоолны газар юм.
+        </p>
+
+
+        <br>
+
+
+        <p>
+            Манай ресторан шинэхэн
+            бүтээгдэхүүнээр амттай,
+            чанартай хоол бэлтгэн үйлчилдэг.
+        </p>
+
+
+        <h3>
+            Манай онцлох хоолнууд:
+        </h3>
+
+
+        <ul>
+
+            <li>
+                Tteokbokki
+            </li>
+
+            <li>
+                Korean Fried Chicken
+            </li>
+
+            <li>
+                Jajangmyeon
+            </li>
+
+            <li>
+                Ramyeon
+            </li>
+
+            <li>
+                Kimbap
+            </li>
+
+        </ul>
+
+
+        <p>
+            <b>
+                Хаяг:
+            </b>
+
+            Hunsni 1-r Delguur,
+            UB, Mongolia
+        </p>
+
+
+        <p>
+            <b>
+                Утас:
+            </b>
+
+            90092299
+        </p>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     6. LOGIN
+================================================== -->
+
+<section id="login" class="login-page">
+
+    <div class="login-box">
+
+
+        <h1>
+            LOGIN
+        </h1>
+
+
+        <p class="login-text">
+            KIMBOGGI HOUSE-д тавтай морил
+        </p>
+
+
+
+        <form>
+
+
+            <label>
+                И-мэйл
+            </label>
+
+            <input
+                type="email"
+                placeholder="example@gmail.com"
+                required
+            >
+
+
+
+            <label>
+                Нууц үг
+            </label>
+
+            <input
+                type="password"
+                placeholder="Нууц үгээ оруулна уу"
+                required
+            >
+
+
+
+            <div class="remember">
+
+                <input
+                    type="checkbox"
+                >
+
+                <span>
+                    Намайг сана
+                </span>
+
+            </div>
+
+
+
+            <button type="submit">
+                НЭВТРЭХ
+            </button>
+
+
+        </form>
+
+
+
+        <p class="register-text">
+
+            Бүртгэлгүй юу?
+
+            <a href="#">
+                Бүртгүүлэх
+            </a>
+
+        </p>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer>
+
+    HUNSNI 1-R DELGUUR,
+    UB, MONGOLIA
+
+    <br>
+
+    Утас: 90092299
+
+    <br>
+
+    © 2026 KIMDOGG HOUSE
+
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Хэрэглэгчийн бүртгэл</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+        }
+
+        /* Custom styles matching the exact design in the image */
+        .blue-border {
+            border: 2px solid #3b9df8;
+        }
+
+        .custom-input {
+            border: 2px solid #3b9df8;
+            background-color: #eaeaea;
+            border-radius: 12px;
+            color: #333;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .custom-input::placeholder {
+            color: #a0a0a0;
+            font-weight: 600;
+        }
+
+        .custom-input:focus {
+            outline: none;
+            background-color: #f5f5f5;
+            box-shadow: 0 0 0 3px rgba(59, 157, 248, 0.3);
+        }
+
+        .custom-btn {
+            border: 2px solid #3b9df8;
+            background-color: #bce0fd;
+            border-radius: 12px;
+            font-weight: 700;
+            color: #1a1a1a;
+            transition: all 0.2s;
+        }
+
+        .custom-btn:hover {
+            background-color: #9eccf8;
+            transform: translateY(-1px);
+        }
+
+        .custom-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Table styles matching image layout */
+        .custom-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .custom-table th, .custom-table td {
+            border: 2px solid #3b9df8;
+            text-align: center;
+            padding: 12px 8px;
+            background-color: #ebebeb;
+            color: #000;
+            font-weight: 700;
+        }
+
+        .custom-table th {
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .delete-btn {
+            background-color: #fddddd;
+            border: 1px solid #f8aaaa;
+            color: #e53e3e;
+            border-radius: 6px;
+            padding: 2px 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .delete-btn:hover {
+            background-color: #f8baba;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white rounded-2xl p-8 max-w-4xl w-full shadow-2xl border border-gray-200">
+        
+        <!-- Header Title -->
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-center text-black mb-8 tracking-wide">
+            Хэрэглэгчийн бүртгэл
+        </h1>
+
+        <!-- Content Grid (Form + Table) -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+            
+            <form id="registrationForm" onsubmit="addUser(event)" class="md:col-span-4 flex flex-col gap-4">
+                <div>
+                    <input 
+                        type="text" 
+                        id="lastName" 
+                        placeholder="Овог . . ." 
+                        required
+                        class="custom-input w-full px-4 py-2.5 text-base font-semibold"
+                    />
+                </div>
+                <div>
+                    <input 
+                        type="text" 
+                        id="firstName" 
+                        placeholder="Нэр . . ." 
+                        required
+                        class="custom-input w-full px-4 py-2.5 text-base font-semibold"
+                    />
+                </div>
+                <div>
+                    <input 
+                        type="number" 
+                        id="age" 
+                        placeholder="Нас . . ." 
+                        required
+                        min="1"
+                        max="120"
+                        class="custom-input w-full px-4 py-2.5 text-base font-semibold"
+                    />
+                </div>
+                
+                <div class="flex justify-end mt-2">
+                    <button 
+                        type="submit" 
+                        class="custom-btn px-6 py-2 text-base shadow-sm"
+                    >
+                        Бүртгэх
+                    </button>
+                </div>
+            </form>
+
+            <div class="md:col-span-8 overflow-x-auto">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">№</th>
+                            <th style="width: 25%;">ОВОГ</th>
+                            <th style="width: 25%;">НЭР</th>
+                            <th style="width: 20%;">НАС</th>
+                            <th style="width: 20%;">ҮЙЛДЭЛ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody">
+                        <!-- Initial pre-populated row matching image -->
+                        <tr>
+                            <td>1</td>
+                            <td>БАТ</td>
+                            <td>БОЛД</td>
+                            <td>30</td>
+                            <td>
+                                <button onclick="deleteRow(this)" class="delete-btn text-red-600">❌</button>
+                            </td>
+                        </tr>
+                        <!-- Empty styled row matching image structure -->
+                        <tr class="empty-row">
+                            <td class="h-12">&nbsp;</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let rowCount = 1;
+
+        // Function to handle adding user
+        function addUser(event) {
+            event.preventDefault();
+
+            const lastNameInput = document.getElementById('lastName');
+            const firstNameInput = document.getElementById('firstName');
+            const ageInput = document.getElementById('age');
+
+            const lastName = lastNameInput.value.trim().toUpperCase();
+            const firstName = firstNameInput.value.trim().toUpperCase();
+            const age = ageInput.value.trim();
+
+            if (!lastName || !firstName || !age) {
+                return;
+            }
+
+            const tbody = document.getElementById('userTableBody');
+            
+            // Remove empty placeholder row if present
+            const emptyRow = tbody.querySelector('.empty-row');
+            if (emptyRow) {
+                emptyRow.remove();
+            }
+
+            rowCount++;
+
+            // Create new table row
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${rowCount}</td>
+                <td>${lastName}</td>
+                <td>${firstName}</td>
+                <td>${age}</td>
+                <td>
+                    <button onclick="deleteRow(this)" class="delete-btn text-red-600">❌</button>
+                </td>
+            `;
+
+            tbody.appendChild(newRow);
+
+            // Re-add empty styled row at bottom if rows are few to maintain visual fidelity
+            ensureEmptyRow();
+
+            // Clear input fields
+            lastNameInput.value = '';
+            firstNameInput.value = '';
+            ageInput.value = '';
+            lastNameInput.focus();
+        }
+
+        // Function to handle deleting a row
+        function deleteRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+            renumberRows();
+            ensureEmptyRow();
+        }
+
+        // Function to keep row numbers sequential
+        function renumberRows() {
+            const tbody = document.getElementById('userTableBody');
+            const rows = tbody.querySelectorAll('tr:not(.empty-row)');
+            rowCount = 0;
+            rows.forEach((row, index) => {
+                rowCount = index + 1;
+                row.cells[0].textContent = rowCount;
+            });
+        }
+
+        // Function to maintain empty row visual state
+        function ensureEmptyRow() {
+            const tbody = document.getElementById('userTableBody');
+            let emptyRow = tbody.querySelector('.empty-row');
+            
+            if (!emptyRow) {
+                emptyRow = document.createElement('tr');
+                emptyRow.className = 'empty-row';
+                emptyRow.innerHTML = `
+                    <td class="h-12">&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                `;
+                tbody.appendChild(emptyRow);
+            }
+        }
+    </script>
+</body>
+</html>

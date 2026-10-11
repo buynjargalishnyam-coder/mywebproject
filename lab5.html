@@ -1,0 +1,1122 @@
+```html
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WED211 - Lab 3</title>
+
+    <style>
+        /* =========================
+           GENERAL DESIGN
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 35px 20px;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #eef2ff;
+
+            background:
+                radial-gradient(circle at 10% 10%, #263b80 0, transparent 30%),
+                radial-gradient(circle at 90% 20%, #662d91 0, transparent 30%),
+                radial-gradient(circle at 50% 100%, #102b4c 0, transparent 35%),
+                #080b18;
+
+            line-height: 1.6;
+        }
+
+        .container {
+            width: min(1100px, 100%);
+            margin: auto;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            text-align: center;
+            padding: 45px 25px;
+            margin-bottom: 28px;
+
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 28px;
+
+            background: rgba(255,255,255,.08);
+            backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,.35),
+                inset 0 1px rgba(255,255,255,.15);
+        }
+
+        header h1 {
+            font-size: clamp(30px, 5vw, 52px);
+            font-weight: 800;
+
+            background: linear-gradient(
+                90deg,
+                #7dd3fc,
+                #c084fc,
+                #f0abfc
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #b8c2dc;
+            font-size: 17px;
+        }
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        section {
+            margin-bottom: 28px;
+            padding: 30px;
+
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 24px;
+
+            background: rgba(15, 20, 40, .72);
+            backdrop-filter: blur(15px);
+
+            box-shadow: 0 15px 40px rgba(0,0,0,.25);
+        }
+
+        h2 {
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+
+            font-size: 25px;
+            color: #dbeafe;
+
+            border-bottom: 1px solid rgba(255,255,255,.12);
+        }
+
+        h3 {
+            color: #f0abfc;
+            margin-bottom: 12px;
+        }
+
+        /* =========================
+           DEMO CARDS
+        ========================= */
+
+        .demo {
+            padding: 22px;
+            margin: 16px 0;
+
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 18px;
+
+            background: rgba(255,255,255,.055);
+
+            transition:
+                transform .3s ease,
+                border-color .3s ease,
+                background .3s ease;
+        }
+
+        .demo:hover {
+            transform: translateY(-4px);
+            border-color: rgba(125,211,252,.5);
+            background: rgba(255,255,255,.09);
+        }
+
+        /* =========================
+           BEFORE / AFTER
+        ========================= */
+
+        .decorated::before {
+            content: "✦ ";
+            color: #7dd3fc;
+        }
+
+        .decorated::after {
+            content: " ✦";
+            color: #e879f9;
+        }
+
+        .link {
+            color: #7dd3fc;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .link::after {
+            content: " [" attr(data-info) "]";
+            color: #a78bfa;
+            font-size: 13px;
+        }
+
+        /* =========================
+           FIRST LETTER
+        ========================= */
+
+        .first-letter::first-letter {
+            font-size: 48px;
+            font-weight: 800;
+            color: #c084fc;
+        }
+
+        /* =========================
+           FIRST LINE
+        ========================= */
+
+        .first-line::first-line {
+            color: #7dd3fc;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* =========================
+           SELECTION
+        ========================= */
+
+        .yellow::selection {
+            background: #facc15;
+            color: #111827;
+        }
+
+        .pink::selection {
+            background: #f472b6;
+            color: white;
+        }
+
+        /* =========================
+           MARKER
+        ========================= */
+
+        .fruit li::marker {
+            color: #7dd3fc;
+            font-size: 22px;
+        }
+
+        .numbers li::marker {
+            color: #f0abfc;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        /* =========================
+           INPUT
+        ========================= */
+
+        input {
+            width: 100%;
+            max-width: 400px;
+            padding: 13px 15px;
+
+            border: 1px solid rgba(125,211,252,.5);
+            border-radius: 12px;
+
+            outline: none;
+            background: rgba(0,0,0,.25);
+            color: white;
+
+            transition: .3s;
+        }
+
+        input:focus {
+            border-color: #c084fc;
+            box-shadow: 0 0 0 4px rgba(192,132,252,.12);
+        }
+
+        input::placeholder {
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        /* =========================
+           FILE BUTTON
+        ========================= */
+
+        input[type="file"] {
+            border: none;
+            padding: 5px;
+        }
+
+        input[type="file"]::file-selector-button {
+            background: linear-gradient(135deg,#7dd3fc,#a78bfa);
+            color: #111827;
+
+            border: none;
+            padding: 11px 17px;
+            margin-right: 10px;
+
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            transform: scale(1.04);
+        }
+
+        /* =========================
+           DIALOG
+        ========================= */
+
+        dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            width: min(450px, 90%);
+
+            padding: 30px;
+
+            border: 1px solid #7dd3fc;
+            border-radius: 20px;
+
+            background: #111827;
+            color: white;
+
+            box-shadow: 0 30px 80px rgba(0,0,0,.6);
+        }
+
+        dialog::backdrop {
+            background: rgba(4,8,20,.7);
+            backdrop-filter: blur(8px);
+        }
+
+        button {
+            border: none;
+            padding: 11px 19px;
+
+            border-radius: 11px;
+
+            background: linear-gradient(135deg,#7dd3fc,#c084fc);
+            color: #111827;
+
+            font-weight: 700;
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(125,211,252,.25);
+        }
+
+        /* =========================
+           HIGHLIGHT
+        ========================= */
+
+        ::highlight(rainbowHighlight) {
+            background: #c084fc;
+            color: white;
+        }
+
+        /* =========================
+           TARGET TEXT
+        ========================= */
+
+        #target {
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(125,211,252,.08);
+        }
+
+        #target:target {
+            outline: 2px solid #7dd3fc;
+            background: rgba(125,211,252,.15);
+        }
+
+        /* =========================
+           SPELLING / GRAMMAR
+        ========================= */
+
+        .editable {
+            padding: 15px;
+
+            border: 1px dashed #c084fc;
+            border-radius: 12px;
+
+            background: rgba(0,0,0,.2);
+        }
+
+        /* =========================
+           VIDEO
+        ========================= */
+
+        video {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 14px;
+        }
+
+        video::cue {
+            color: #7dd3fc;
+            background: rgba(0,0,0,.85);
+        }
+
+        /* =========================
+           DETAILS
+        ========================= */
+
+        details {
+            border: 1px solid rgba(255,255,255,.15);
+            padding: 17px;
+            border-radius: 13px;
+
+            background: rgba(255,255,255,.04);
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 700;
+            color: #c4b5fd;
+        }
+
+        details::details-content {
+            padding-top: 10px;
+            color: #7dd3fc;
+        }
+
+        /* =========================
+           SCROLLBAR
+        ========================= */
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #080b18;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(#7dd3fc,#c084fc);
+            border-radius: 20px;
+        }
+
+        /* =========================
+           MEDIA QUERY GRID
+        ========================= */
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .media-box {
+            padding: 20px;
+
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 16px;
+
+            background: rgba(255,255,255,.05);
+
+            transition: .3s;
+        }
+
+        .media-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .status {
+            color: #64748b;
+        }
+
+        .status::after {
+            content: " ✘ OFF";
+        }
+
+        /* =========================
+           WIDTH
+        ========================= */
+
+        @media (min-width: 900px) {
+            .min-width-900 {
+                border-color: #7dd3fc;
+            }
+
+            .min-width-900 .status {
+                color: #7dd3fc;
+            }
+
+            .min-width-900 .status::after {
+                content: " ✔ ON";
+            }
+        }
+
+        @media (max-width: 600px) {
+            .max-width-600 {
+                border-color: #f0abfc;
+            }
+
+            .max-width-600 .status {
+                color: #f0abfc;
+            }
+
+            .max-width-600 .status::after {
+                content: " ✔ ON";
+            }
+        }
+
+        /* =========================
+           HEIGHT
+        ========================= */
+
+        @media (min-height: 700px) {
+            .min-height-700 {
+                border-color: #7dd3fc;
+            }
+
+            .min-height-700 .status {
+                color: #7dd3fc;
+            }
+
+            .min-height-700 .status::after {
+                content: " ✔ ON";
+            }
+        }
+
+        /* =========================
+           ORIENTATION
+        ========================= */
+
+        @media (orientation: landscape) {
+            .landscape {
+                border-color: #7dd3fc;
+            }
+
+            .landscape .status {
+                color: #7dd3fc;
+            }
+
+            .landscape .status::after {
+                content: " ✔ ON";
+            }
+        }
+
+        @media (orientation: portrait) {
+            .portrait {
+                border-color: #f0abfc;
+            }
+
+            .portrait .status {
+                color: #f0abfc;
+            }
+
+            .portrait .status::after {
+                content: " ✔ ON";
+            }
+        }
+
+        /* =========================
+           DARK / LIGHT
+        ========================= */
+
+        @media (prefers-color-scheme: dark) {
+            .dark-mode {
+                border-color: #7dd3fc;
+            }
+
+            .dark-mode .status {
+                color: #7dd3fc;
+            }
+
+            .dark-mode .status::after {
+                content: " ✔ ON";
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .light-mode {
+                border-color: #fbbf24;
+            }
+
+            .light-mode .status {
+                color: #fbbf24;
+            }
+
+            .light-mode .status::after {
+                content: " ✔ ON";
+            }
+        }
+
+        /* =========================
+           HOVER
+        ========================= */
+
+        @media (hover: hover) {
+            .hover-yes {
+                border-color: #7dd3fc;
+            }
+
+            .hover-yes .status {
+                color: #7dd3fc;
+            }
+
+            .hover-yes .status::after {
+                content: " ✔ ON";
+            }
+        }
+
+        /* =========================
+           POINTER
+        ========================= */
+
+        @media (pointer: fine) {
+            .pointer-fine {
+                border-color: #7dd3fc;
+            }
+
+            .pointer-fine .status {
+                color: #7dd3fc;
+            }
+
+            .pointer-fine .status::after {
+                content: " ✔ ON";
+            }
+        }
+
+        /* =========================
+           ASPECT RATIO
+        ========================= */
+
+        @media (min-aspect-ratio: 16/9) {
+            .ratio {
+                border-color: #7dd3fc;
+            }
+
+            .ratio .status {
+                color: #7dd3fc;
+            }
+
+            .ratio .status::after {
+                content: " ✔ ON";
+            }
+        }
+
+        /* =========================
+           REDUCED MOTION
+        ========================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            * {
+                scroll-behavior: auto;
+                transition: none !important;
+                animation: none !important;
+            }
+
+            .reduced-motion {
+                border-color: #7dd3fc;
+            }
+
+            .reduced-motion .status::after {
+                content: " ✔ ON";
+            }
+        }
+
+        /* =========================
+           PRINT
+        ========================= */
+
+        @media print {
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            section {
+                border: 1px solid black;
+                background: white;
+                box-shadow: none;
+            }
+
+            header h1,
+            h2 {
+                color: black;
+                -webkit-text-fill-color: black;
+            }
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 15px;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 30px 18px;
+            }
+
+            .demo {
+                padding: 18px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>✦ WED211 · Lab 3</h1>
+        <p>CSS Pseudo-elements & @media Queries</p>
+    </header>
+
+
+    <!-- =========================
+         PSEUDO ELEMENTS
+    ========================== -->
+
+    <section>
+
+        <h2>1. CSS Pseudo-elements</h2>
+
+        <div class="demo">
+
+            <h3 class="decorated">Decorated Text</h3>
+
+            <p>
+                Inbox
+                <span class="link" data-info="New messages">
+                    Open inbox
+                </span>
+            </p>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::first-letter</h3>
+
+            <p class="first-letter">
+                Once upon a time, a web developer learned CSS and made
+                every page look like a rainbow.
+            </p>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::first-line</h3>
+
+            <p class="first-line">
+                Only the first line of this paragraph is purple,
+                bold and uppercase. Resize the window and watch
+                the first line change.
+            </p>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::selection</h3>
+
+            <p class="yellow">
+                Select this text: yellow highlight.
+            </p>
+
+            <p class="pink">
+                Select this one: pink highlight!
+            </p>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::marker</h3>
+
+            <ul class="fruit">
+                <li>Strawberry</li>
+                <li>Orange</li>
+                <li>Lemon</li>
+                <li>Kiwi</li>
+            </ul>
+
+            <ol class="numbers">
+                <li>Green numbers</li>
+                <li>Bigger markers</li>
+            </ol>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::placeholder</h3>
+
+            <input
+                type="text"
+                placeholder="Type your name..."
+            >
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::file-selector-button</h3>
+
+            <input type="file">
+
+            <p>
+                The "Choose file" button is styled.
+            </p>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::backdrop</h3>
+
+            <button onclick="myDialog.showModal()">
+                Open dialog
+            </button>
+
+            <dialog id="myDialog">
+
+                <h3>✦ Hello!</h3>
+
+                <p>
+                    The page behind the dialog gets a gradient blur.
+                </p>
+
+                <br>
+
+                <button onclick="myDialog.close()">
+                    Close
+                </button>
+
+            </dialog>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::highlight()</h3>
+
+            <p id="highlightText">
+                The CSS Custom Highlight API can color any word,
+                like rainbow and colorful, without extra tags.
+            </p>
+
+            <p>
+                Words painted with JavaScript Ranges.
+            </p>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::target-text</h3>
+
+            <p id="target">
+                Scroll-to-text fragment: click to highlight
+            </p>
+
+            <br>
+
+            <a href="#target" style="color:#7dd3fc;">
+                Click to target
+            </a>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::spelling-error / ::grammar-error</h3>
+
+            <p
+                class="editable"
+                contenteditable="true"
+                spellcheck="true"
+            >
+                Thiss sentense has speling erors.
+            </p>
+
+            <small>
+                Click inside and type. Browser support may vary.
+            </small>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::cue</h3>
+
+            <p>
+                Subtitle colors can be styled with ::cue.
+            </p>
+
+            <video controls>
+                <track
+                    kind="subtitles"
+                    srclang="en"
+                    label="English"
+                    default
+                    src=""
+                >
+            </video>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::details-content</h3>
+
+            <details>
+
+                <summary>
+                    Click to open
+                </summary>
+
+                <p>
+                    This content uses ::details-content.
+                </p>
+
+            </details>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::-webkit-scrollbar</h3>
+
+            <p>
+                Scroll me! ✨
+            </p>
+
+            <p>
+                Blue to purple scrollbar thumb.
+            </p>
+
+            <p style="height:300px;">
+                Keep going...<br><br>
+                Almost there...<br><br>
+                The end! 🎉
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MEDIA QUERIES
+    ========================== -->
+
+    <section>
+
+        <h2>2. @media Queries</h2>
+
+        <p style="color:#aab5d1; margin-bottom:20px;">
+            Resize the window, rotate your phone,
+            switch dark mode, or press Ctrl+P.
+        </p>
+
+
+        <div class="media-grid">
+
+            <div class="media-box min-width-900">
+                <b>(min-width: 900px)</b>
+                <span class="status"></span>
+            </div>
+
+            <div class="media-box max-width-600">
+                <b>(max-width: 600px)</b>
+                <span class="status"></span>
+            </div>
+
+            <div class="media-box min-height-700">
+                <b>(min-height: 700px)</b>
+                <span class="status"></span>
+            </div>
+
+            <div class="media-box landscape">
+                <b>(orientation: landscape)</b>
+                <span class="status"></span>
+            </div>
+
+            <div class="media-box portrait">
+                <b>(orientation: portrait)</b>
+                <span class="status"></span>
+            </div>
+
+            <div class="media-box ratio">
+                <b>(min-aspect-ratio: 16/9)</b>
+                <span class="status"></span>
+            </div>
+
+            <div class="media-box dark-mode">
+                <b>(prefers-color-scheme: dark)</b>
+                <span class="status"></span>
+            </div>
+
+            <div class="media-box light-mode">
+                <b>(prefers-color-scheme: light)</b>
+                <span class="status"></span>
+            </div>
+
+            <div class="media-box hover-yes">
+                <b>(hover: hover)</b>
+                <span class="status"></span>
+            </div>
+
+            <div class="media-box pointer-fine">
+                <b>(pointer: fine)</b>
+                <span class="status"></span>
+            </div>
+
+            <div class="media-box reduced-motion">
+                <b>(prefers-reduced-motion: reduce)</b>
+                <span class="status"></span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MEDIA TYPES
+    ========================== -->
+
+    <section>
+
+        <h2>3. Media Types & Logical Operators</h2>
+
+        <div class="demo">
+
+            <p><b>@media all</b> → Бүх төхөөрөмжид</p>
+
+            <p><b>@media screen</b> → Дэлгэц дээр</p>
+
+            <p><b>@media print</b> → Хэвлэх үед</p>
+
+            <p>
+                <b>screen and (min-width: 700px)</b>
+                → Дэлгэц + хамгийн багадаа 700px
+            </p>
+
+            <p>
+                <b>(max-width: 500px), (orientation: portrait)</b>
+                → OR нөхцөл
+            </p>
+
+            <p>
+                <b>(min-width: 600px) or (hover: none)</b>
+                → OR логик
+            </p>
+
+            <p>
+                <b>not print</b>
+                → Print биш үед
+            </p>
+
+            <p>
+                <b>only screen and (min-width: 320px)</b>
+                → Зөвхөн screen
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        <p style="
+            text-align:center;
+            color:#64748b;
+            padding:15px;
+        ">
+            ✦ Made for WED211 · Lab 3 ✦
+        </p>
+    </footer>
+
+</div>
+
+
+<script>
+
+    /* =========================
+       CSS CUSTOM HIGHLIGHT API
+    ========================== */
+
+    if (CSS.highlights) {
+
+        const text =
+            document.getElementById("highlightText");
+
+        const range =
+            document.createRange();
+
+        range.selectNodeContents(text);
+
+        const highlight =
+            new Highlight(range);
+
+        CSS.highlights.set(
+            "rainbowHighlight",
+            highlight
+        );
+    }
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WED211 - Lab 3</title>
+
+    <style>
+        /* =========================
+           GENERAL DESIGN
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #12001f, #001f2f);
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 2px solid #00ffb3;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.35);
+        }
+
+        header h1 {
+            color: #00ffb3;
+            margin-bottom: 5px;
+        }
+
+        section {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #444;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #ff6bd6;
+            border-bottom: 1px solid #555;
+            padding-bottom: 10px;
+        }
+
+        .demo {
+            padding: 15px;
+            margin: 12px 0;
+            background: #111827;
+            border-radius: 10px;
+        }
+
+
+        /* =========================
+           1. ::before / ::after
+        ========================= */
+
+        .decorated::before {
+            content: "★ ";
+            color: #00ffb3;
+        }
+
+        .decorated::after {
+            content: " ★";
+            color: #ff4ecd;
+        }
+
+
+        /* attr() */
+
+        .link::after {
+            content: " [" attr(data-info) "]";
+            color: #00ffb3;
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           ::first-letter
+        ========================= */
+
+        .first-letter::first-letter {
+            font-size: 45px;
+            font-weight: bold;
+            color: #ff4ecd;
+        }
+
+
+        /* =========================
+           ::first-line
+        ========================= */
+
+        .first-line::first-line {
+            color: #c77dff;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+
+        /* =========================
+           ::selection
+        ========================= */
+
+        .yellow::selection {
+            background: yellow;
+            color: black;
+        }
+
+        .pink::selection {
+            background: hotpink;
+            color: white;
+        }
+
+
+        /* =========================
+           ::marker
+        ========================= */
+
+        .fruit li::marker {
+            color: #00ffb3;
+            font-size: 25px;
+        }
+
+        .numbers li::marker {
+            color: #ff4ecd;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           ::placeholder
+        ========================= */
+
+        input::placeholder {
+            color: #ff69b4;
+            font-style: italic;
+        }
+
+        input {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #00ffb3;
+            background: #111;
+            color: white;
+        }
+
+
+        /* =========================
+           ::file-selector-button
+        ========================= */
+
+        input[type="file"]::file-selector-button {
+            background: #ff4ecd;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           ::backdrop
+        ========================= */
+
+        dialog {
+            background: #151525;
+            color: white;
+            border: 2px solid #00ffb3;
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        dialog::backdrop {
+            background: linear-gradient(
+                135deg,
+                rgba(255, 0, 150, 0.5),
+                rgba(0, 255, 200, 0.5)
+            );
+            backdrop-filter: blur(5px);
+        }
+
+        button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #00ffb3;
+        }
+
+
+        /* =========================
+           ::highlight()
+        ========================= */
+
+        ::highlight(rainbowHighlight) {
+            background: #ff69b4;
+            color: yellow;
+        }
+
+
+        /* =========================
+           ::target-text
+        ========================= */
+
+        #target {
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+
+        /* =========================
+           ::spelling-error
+           ::grammar-error
+        ========================= */
+
+        .editable {
+            padding: 15px;
+            border: 1px dashed #ff4ecd;
+            border-radius: 8px;
+        }
+
+
+        /* =========================
+           ::cue
+        ========================= */
+
+        video {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        video::cue {
+            color: #00ffb3;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+
+        /* =========================
+           ::details-content
+        ========================= */
+
+        details {
+            border: 1px solid #555;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        details::details-content {
+            padding-top: 10px;
+            color: #00ffb3;
+        }
+
+
+        /* =========================
+           ::-webkit-scrollbar
+        ========================= */
+
+        ::-webkit-scrollbar {
+            width: 14px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #15001f;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(#ff4ecd, #7b2cff);
+            border-radius: 10px;
+        }
+
+
+        /* =========================
+           MEDIA QUERY STATUS
+        ========================= */
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .media-box {
+            padding: 15px;
+            border: 1px solid #444;
+            border-radius: 10px;
+            background: #101010;
+        }
+
+        .status {
+            color: #777;
+        }
+
+        .status::after {
+            content: " ✘ OFF";
+        }
+
+
+        /* =========================
+           WIDTH
+        ========================= */
+
+        @media (min-width: 900px) {
+            .min-width-900 {
+                border-color: #00ffb3;
+            }
+
+            .min-width-900 .status {
+                color: #00ffb3;
+            }
+
+            .min-width-900 .status::after {
+                content: " ✔ ON";
+            }
+        }
+
+        @media (max-width: 600px) {
+            .max-width-600 {
+                border-color: #ff4ecd;
+            }
+
+            .max-width-600 .status {
+                color: #ff4ecd;
+            }
+
+            .max-width-600 .status::after {
+                content: " ✔ ON";
+            }
+        }
+
+
+        /* =========================
+           HEIGHT
+        ========================= */
+
+        @media (min-height: 700px) {
+            .min-height-700 {
+                border-color: #00ffb3;
+            }
+
+            .min-height-700 .status::after {
+                content: " ✔ ON";
+            }
+
+            .min-height-700 .status {
+                color: #00ffb3;
+            }
+        }
+
+
+        /* =========================
+           ORIENTATION
+        ========================= */
+
+        @media (orientation: landscape) {
+            .landscape {
+                border-color: #00ffb3;
+            }
+
+            .landscape .status::after {
+                content: " ✔ ON";
+            }
+
+            .landscape .status {
+                color: #00ffb3;
+            }
+        }
+
+        @media (orientation: portrait) {
+            .portrait {
+                border-color: #ff4ecd;
+            }
+
+            .portrait .status::after {
+                content: " ✔ ON";
+            }
+
+            .portrait .status {
+                color: #ff4ecd;
+            }
+        }
+
+
+        /* =========================
+           DARK / LIGHT MODE
+        ========================= */
+
+        @media (prefers-color-scheme: dark) {
+            .dark-mode {
+                border-color: #00ffb3;
+            }
+
+            .dark-mode .status::after {
+                content: " ✔ ON";
+            }
+
+            .dark-mode .status {
+                color: #00ffb3;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .light-mode {
+                border-color: orange;
+            }
+
+            .light-mode .status::after {
+                content: " ✔ ON";
+            }
+
+            .light-mode .status {
+                color: orange;
+            }
+        }
+
+
+        /* =========================
+           HOVER
+        ========================= */
+
+        @media (hover: hover) {
+            .hover-yes {
+                border-color: #00ffb3;
+            }
+
+            .hover-yes .status::after {
+                content: " ✔ ON";
+            }
+
+            .hover-yes .status {
+                color: #00ffb3;
+            }
+        }
+
+
+        /* =========================
+           POINTER
+        ========================= */
+
+        @media (pointer: fine) {
+            .pointer-fine {
+                border-color: #00ffb3;
+            }
+
+            .pointer-fine .status::after {
+                content: " ✔ ON";
+            }
+
+            .pointer-fine .status {
+                color: #00ffb3;
+            }
+        }
+
+
+        /* =========================
+           ASPECT RATIO
+        ========================= */
+
+        @media (min-aspect-ratio: 16/9) {
+            .ratio {
+                border-color: #00ffb3;
+            }
+
+            .ratio .status::after {
+                content: " ✔ ON";
+            }
+
+            .ratio .status {
+                color: #00ffb3;
+            }
+        }
+
+
+        /* =========================
+           REDUCED MOTION
+        ========================= */
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                scroll-behavior: auto;
+                transition: none !important;
+                animation: none !important;
+            }
+
+            .reduced-motion {
+                border-color: #00ffb3;
+            }
+
+            .reduced-motion .status::after {
+                content: " ✔ ON";
+            }
+        }
+
+
+        /* =========================
+           PRINT
+        ========================= */
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            section {
+                border: 1px solid black;
+                background: white;
+            }
+
+            header h1,
+            h2 {
+                color: black;
+            }
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 700px) {
+            body {
+                padding: 15px;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>🌈 WED211 · Lab 3</h1>
+        <p>CSS Pseudo-elements & @media Queries</p>
+    </header>
+
+
+    <!-- =========================
+         PSEUDO ELEMENTS
+    ========================== -->
+
+    <section>
+
+        <h2>1. CSS Pseudo-elements</h2>
+
+        <div class="demo">
+            <h3 class="decorated">Decorated Text</h3>
+
+            <p>
+                Inbox
+                <span class="link" data-info="New messages">
+                    Open inbox
+                </span>
+            </p>
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::first-letter</h3>
+
+            <p class="first-letter">
+                Once upon a time, a web developer learned CSS and made
+                every page look like a rainbow.
+            </p>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::first-line</h3>
+
+            <p class="first-line">
+                Only the first line of this paragraph is purple,
+                bold and uppercase. Resize the window and watch
+                the first line change.
+            </p>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::selection</h3>
+
+            <p class="yellow">
+                Select this text: yellow highlight.
+            </p>
+
+            <p class="pink">
+                Select this one: pink highlight!
+            </p>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::marker</h3>
+
+            <ul class="fruit">
+                <li>Strawberry</li>
+                <li>Orange</li>
+                <li>Lemon</li>
+                <li>Kiwi</li>
+            </ul>
+
+            <ol class="numbers">
+                <li>Green numbers</li>
+                <li>Bigger markers</li>
+            </ol>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::placeholder</h3>
+
+            <input
+                type="text"
+                placeholder="Type your name..."
+            >
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::file-selector-button</h3>
+
+            <input type="file">
+
+            <p>
+                The "Choose file" button is styled.
+            </p>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::backdrop</h3>
+
+            <button onclick="myDialog.showModal()">
+                Open dialog
+            </button>
+
+            <dialog id="myDialog">
+
+                <h3>🌈 Hello!</h3>
+
+                <p>
+                    The page behind the dialog gets a gradient blur.
+                </p>
+
+                <button onclick="myDialog.close()">
+                    Close
+                </button>
+
+            </dialog>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::highlight()</h3>
+
+            <p id="highlightText">
+                The CSS Custom Highlight API can color any word,
+                like rainbow and colorful, without extra tags.
+            </p>
+
+            <p>
+                Words painted with JavaScript Ranges.
+            </p>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::target-text</h3>
+
+            <p id="target">
+                Scroll-to-text fragment: click to highlight
+            </p>
+
+            <a href="#target">
+                Click to target
+            </a>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::spelling-error / ::grammar-error</h3>
+
+            <p
+                class="editable"
+                contenteditable="true"
+                spellcheck="true"
+            >
+                Thiss sentense has speling erors.
+            </p>
+
+            <small>
+                Click inside and type. Browser support may vary.
+            </small>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::cue</h3>
+
+            <p>
+                Subtitle colors can be styled with ::cue.
+            </p>
+
+            <video controls>
+                <track
+                    kind="subtitles"
+                    srclang="en"
+                    label="English"
+                    default
+                    src=""
+                >
+            </video>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::details-content</h3>
+
+            <details>
+
+                <summary>
+                    Click to open
+                </summary>
+
+                <p>
+                    This content uses ::details-content.
+                </p>
+
+            </details>
+
+        </div>
+
+
+        <div class="demo">
+
+            <h3>::-webkit-scrollbar</h3>
+
+            <p>
+                Scroll me! 🍭
+            </p>
+
+            <p>
+                Pink to purple scrollbar thumb.
+            </p>
+
+            <p style="height:300px;">
+                Keep going...<br><br>
+                Almost there...<br><br>
+                The end! 🎉
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MEDIA QUERIES
+    ========================== -->
+
+    <section>
+
+        <h2>2. @media Queries</h2>
+
+        <p>
+            Resize the window, rotate your phone,
+            switch dark mode, or press Ctrl+P.
+        </p>
+
+
+        <div class="media-grid">
+
+            <div class="media-box min-width-900">
+                <b>(min-width: 900px)</b>
+                <span class="status"></span>
+            </div>
+
+
+            <div class="media-box max-width-600">
+                <b>(max-width: 600px)</b>
+                <span class="status"></span>
+            </div>
+
+
+            <div class="media-box min-height-700">
+                <b>(min-height: 700px)</b>
+                <span class="status"></span>
+            </div>
+
+
+            <div class="media-box landscape">
+                <b>(orientation: landscape)</b>
+                <span class="status"></span>
+            </div>
+
+
+            <div class="media-box portrait">
+                <b>(orientation: portrait)</b>
+                <span class="status"></span>
+            </div>
+
+
+            <div class="media-box ratio">
+                <b>(min-aspect-ratio: 16/9)</b>
+                <span class="status"></span>
+            </div>
+
+
+            <div class="media-box dark-mode">
+                <b>(prefers-color-scheme: dark)</b>
+                <span class="status"></span>
+            </div>
+
+
+            <div class="media-box light-mode">
+                <b>(prefers-color-scheme: light)</b>
+                <span class="status"></span>
+            </div>
+
+
+            <div class="media-box hover-yes">
+                <b>(hover: hover)</b>
+                <span class="status"></span>
+            </div>
+
+
+            <div class="media-box pointer-fine">
+                <b>(pointer: fine)</b>
+                <span class="status"></span>
+            </div>
+
+
+            <div class="media-box reduced-motion">
+                <b>(prefers-reduced-motion: reduce)</b>
+                <span class="status"></span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ALL MEDIA TYPES
+    ========================== -->
+
+    <section>
+
+        <h2>3. Media Types & Logical Operators</h2>
+
+        <div class="demo">
+
+            <p><b>@media all</b> → Бүх төхөөрөмжид</p>
+
+            <p><b>@media screen</b> → Дэлгэц дээр</p>
+
+            <p><b>@media print</b> → Хэвлэх үед</p>
+
+            <p>
+                <b>screen and (min-width: 700px)</b>
+                → Дэлгэц + хамгийн багадаа 700px
+            </p>
+
+            <p>
+                <b>(max-width: 500px), (orientation: portrait)</b>
+                → OR нөхцөл
+            </p>
+
+            <p>
+                <b>(min-width: 600px) or (hover: none)</b>
+                → OR логик
+            </p>
+
+            <p>
+                <b>not print</b>
+                → Print биш үед
+            </p>
+
+            <p>
+                <b>only screen and (min-width: 320px)</b>
+                → Зөвхөн screen
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        <p style="text-align:center;">
+            🌈 Made for WED211 · Lab 3
+        </p>
+    </footer>
+
+</div>
+
+
+<script>
+
+    /* =========================
+       CSS CUSTOM HIGHLIGHT API
+    ========================== */
+
+    if (CSS.highlights) {
+
+        const text = document.getElementById("highlightText");
+
+        const range = document.createRange();
+
+        range.selectNodeContents(text);
+
+        const highlight = new Highlight(range);
+
+        CSS.highlights.set(
+            "rainbowHighlight",
+            highlight
+        );
+    }
+
+</script>
+
+</body>
+</html>

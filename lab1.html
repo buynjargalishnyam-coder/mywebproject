@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Хичээлийн хуваарь</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eef2ff, #f8fafc);
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e293b;
+            margin-bottom: 25px;
+            font-size: 32px;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            padding: 15px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            min-width: 1500px;
+            text-align: center;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 10px 6px;
+            height: 55px;
+        }
+
+        th {
+            background: #334155;
+            color: white;
+            font-weight: bold;
+        }
+
+        .day {
+            background: #1e3a8a;
+            font-size: 17px;
+        }
+
+        .time {
+            background: #475569;
+            font-size: 13px;
+        }
+
+        .info {
+            background: #0f172a;
+            min-width: 110px;
+        }
+
+        .course {
+            font-weight: bold;
+            background: #f8fafc;
+        }
+
+        .teacher {
+            font-weight: 600;
+            background: #f8fafc;
+        }
+
+        /* Хичээлүүдийн өнгө */
+        .LAG {
+            background: #f9a8d4;
+            color: #831843;
+            font-weight: bold;
+        }
+
+        .DBB {
+            background: #99f6e4;
+            color: #134e4a;
+            font-weight: bold;
+        }
+
+        .ISP {
+            background: #d8b4fe;
+            color: #581c87;
+            font-weight: bold;
+        }
+
+        .FAI {
+            background: #fdba74;
+            color: #7c2d12;
+            font-weight: bold;
+        }
+
+        .WEB {
+            background: #93c5fd;
+            color: #1e3a8a;
+            font-weight: bold;
+        }
+
+        .IMLS {
+            background: #fde68a;
+            color: #713f12;
+            font-weight: bold;
+        }
+
+        .MMS {
+            background: #86efac;
+            color: #14532d;
+            font-weight: bold;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .legend-item {
+            padding: 9px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>📚 Хичээлийн хуваарь</h1>
+
+    <div class="table-container">
+        <table>
+
+            <!-- ӨДРҮҮД -->
+            <tr>
+                <th class="info" rowspan="2">№</th>
+                <th class="info" rowspan="2">Хичээл</th>
+                <th class="info" rowspan="2">Багш</th>
+
+                <th class="day" colspan="12">Даваа</th>
+                <th class="day" colspan="12">Мягмар</th>
+                <th class="day" colspan="12">Лхагва</th>
+                <th class="day" colspan="12">Пүрэв</th>
+            </tr>
+
+            <!-- ЦАГ -->
+            <tr>
+                <!-- Даваа -->
+                <th class="time">1</th>
+                <th class="time">2</th>
+                <th class="time">3</th>
+                <th class="time">4</th>
+                <th class="time">5</th>
+                <th class="time">6</th>
+                <th class="time">7</th>
+                <th class="time">8</th>
+                <th class="time">9</th>
+                <th class="time">10</th>
+                <th class="time">11</th>
+                <th class="time">12</th>
+
+                <!-- Мягмар -->
+                <th class="time">1</th>
+                <th class="time">2</th>
+                <th class="time">3</th>
+                <th class="time">4</th>
+                <th class="time">5</th>
+                <th class="time">6</th>
+                <th class="time">7</th>
+                <th class="time">8</th>
+                <th class="time">9</th>
+                <th class="time">10</th>
+                <th class="time">11</th>
+                <th class="time">12</th>
+
+                <!-- Лхагва -->
+                <th class="time">1</th>
+                <th class="time">2</th>
+                <th class="time">3</th>
+                <th class="time">4</th>
+                <th class="time">5</th>
+                <th class="time">6</th>
+                <th class="time">7</th>
+                <th class="time">8</th>
+                <th class="time">9</th>
+                <th class="time">10</th>
+                <th class="time">11</th>
+                <th class="time">12</th>
+
+                <!-- Пүрэв -->
+                <th class="time">1</th>
+                <th class="time">2</th>
+                <th class="time">3</th>
+                <th class="time">4</th>
+                <th class="time">5</th>
+                <th class="time">6</th>
+                <th class="time">7</th>
+                <th class="time">8</th>
+                <th class="time">9</th>
+                <th class="time">10</th>
+                <th class="time">11</th>
+                <th class="time">12</th>
+            </tr>
+
+
+            <!-- 1. LAG -->
+            <tr>
+                <td>1</td>
+                <td class="course">LAG201-GP221</td>
+                <td class="teacher">Д. Дунгаамаа</td>
+
+                <!-- Даваа -->
+                <td colspan="12"></td>
+
+                <!-- Мягмар -->
+                <td colspan="12"></td>
+
+                <!-- Лхагва 4-6 -->
+                <td colspan="3"></td>
+                <td colspan="3" class="LAG">LAG<br>B-402B</td>
+                <td colspan="6"></td>
+
+                <!-- Пүрэв -->
+                <td colspan="12"></td>
+            </tr>
+
+
+            <!-- 2. DBB -->
+            <tr>
+                <td>2</td>
+                <td class="course">DBB211-GP213</td>
+                <td class="teacher">Э. Оргил</td>
+
+                <!-- Даваа -->
+                <td colspan="12"></td>
+
+                <!-- Мягмар 4-6 -->
+                <td colspan="3"></td>
+                <td colspan="3" class="DBB">DBB<br>RC200-11B</td>
+                <td colspan="6"></td>
+
+                <!-- Лхагва -->
+                <td colspan="12"></td>
+
+                <!-- Пүрэв -->
+                <td colspan="12"></td>
+            </tr>
+
+
+            <!-- 3. ISP -->
+            <tr>
+                <td>3</td>
+                <td class="course">ISP202-GP223</td>
+                <td class="teacher">Д. Нямбаяр</td>
+
+                <!-- Даваа -->
+                <td colspan="12"></td>
+
+                <!-- Мягмар -->
+                <td colspan="12"></td>
+
+                <!-- Лхагва 7-9 -->
+                <td colspan="6"></td>
+                <td colspan="3" class="ISP">ISP<br>RC200-11B</td>
+                <td colspan="3"></td>
+
+                <!-- Пүрэв -->
+                <td colspan="12"></td>
+            </tr>
+
+
+            <!-- 4. FAI -->
+            <tr>
+                <td>4</td>
+                <td class="course">FAI201-GP225</td>
+                <td class="teacher">М. Цэцэнцэнгэл</td>
+
+                <!-- Даваа -->
+                <td colspan="12"></td>
+
+                <!-- Мягмар 1-3 -->
+                <td colspan="3" class="FAI">FAI<br>RC-F3 305</td>
+                <td colspan="9"></td>
+
+                <!-- Лхагва -->
+                <td colspan="12"></td>
+
+                <!-- Пүрэв -->
+                <td colspan="12"></td>
+            </tr>
+
+
+            <!-- 5. WEB -->
+            <tr>
+                <td>5</td>
+                <td class="course">WEB211-GP217</td>
+                <td class="teacher">З. Энхболд</td>
+
+                <!-- Даваа -->
+                <td colspan="12"></td>
+
+                <!-- Мягмар 10-12 -->
+                <td colspan="9"></td>
+                <td colspan="3" class="WEB">WEB<br>RC-F3 305</td>
+
+                <!-- Лхагва -->
+                <td colspan="12"></td>
+
+                <!-- Пүрэв -->
+                <td colspan="12"></td>
+            </tr>
+
+
+            <!-- 6. IMLS -->
+            <tr>
+                <td>6</td>
+                <td class="course">IMLS111-GP245</td>
+                <td class="teacher">Г. Даваажаргал</td>
+
+                <!-- Даваа 4-5 -->
+                <td colspan="3"></td>
+                <td colspan="2" class="IMLS">IMLS<br>Цахим</td>
+                <td colspan="7"></td>
+
+                <!-- Мягмар 7-8 -->
+                <td colspan="6"></td>
+                <td colspan="2" class="IMLS">IMLS<br>B-402B</td>
+                <td colspan="4"></td>
+
+                <!-- Лхагва -->
+                <td colspan="12"></td>
+
+                <!-- Пүрэв -->
+                <td colspan="12"></td>
+            </tr>
+
+
+            <!-- 7. MMS -->
+            <tr>
+                <td>7</td>
+                <td class="course">MMS211-GP197</td>
+                <td class="teacher">Т. Ууганболд</td>
+
+                <!-- Даваа -->
+                <td colspan="12"></td>
+
+                <!-- Мягмар -->
+                <td colspan="12"></td>
+
+                <!-- Лхагва -->
+                <td colspan="12"></td>
+
+                <!-- Пүрэв 1-3 -->
+                <td colspan="3" class="MMS">MMS<br>C-C302</td>
+                <td colspan="9"></td>
+            </tr>
+
+        </table>
+    </div>
+
+
+    <!-- ӨНГИЙН ТАЙЛБАР -->
+    <div class="legend">
+        <div class="legend-item LAG">LAG</div>
+        <div class="legend-item DBB">DBB</div>
+        <div class="legend-item ISP">ISP</div>
+        <div class="legend-item FAI">FAI</div>
+        <div class="legend-item WEB">WEB</div>
+        <div class="legend-item IMLS">IMLS</div>
+        <div class="legend-item MMS">MMS</div>
+    </div>
+
+</body>
+</html>

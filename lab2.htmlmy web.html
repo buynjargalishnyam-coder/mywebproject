@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Миний хувийн веб хуудас</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: white;
+        }
+
+        /* Толгой хэсэг */
+        header {
+            background: #080808;
+            border-bottom: 3px solid #00ff99;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #00ff99;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            background: #ddd;
+            color: #222;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        nav button:hover {
+            background: #00ff99;
+            color: black;
+        }
+
+        nav button.active {
+            background: #00ff99;
+            color: black;
+        }
+
+        /* Үндсэн хэсэг */
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .profile {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+        /* Зүүн талын профайл */
+        .profile-card {
+            background: #111;
+            border: 2px solid #00ff99;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .profile-card img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #00ff99;
+            margin-bottom: 15px;
+        }
+
+        .profile-card h2 {
+            color: #00ff99;
+            margin-bottom: 15px;
+        }
+
+        .info {
+            text-align: left;
+            line-height: 2;
+        }
+
+        /* Агуулга */
+        #content {
+            min-height: 500px;
+            background: #111;
+            border: 2px solid #00ff99;
+            padding: 30px;
+        }
+
+        #content h2 {
+            color: #00ff99;
+            margin-bottom: 20px;
+        }
+
+        #content p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* Зургийн хэсэг */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border: 2px solid #00ff99;
+            border-radius: 5px;
+        }
+
+        /* Бичлэг */
+        .videos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .videos iframe {
+            width: 100%;
+            height: 280px;
+            border: 2px solid #00ff99;
+        }
+
+        /* Газрын зураг */
+        .map {
+            width: 100%;
+            height: 400px;
+            border: 2px solid #00ff99;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            border-top: 2px solid #00ff99;
+            padding: 25px;
+            text-align: center;
+            background: #080808;
+        }
+
+        footer span {
+            color: #00ff99;
+        }
+
+        /* Утасны дэлгэц */
+        @media (max-width: 700px) {
+
+            .profile {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery,
+            .videos {
+                grid-template-columns: 1fr;
+            }
+
+            #content {
+                padding: 20px;
+            }
+
+            nav button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ТОЛГОЙ ХЭСЭГ -->
+    <header>
+
+        <h1>МИНИЙ ХУВИЙН ВЕБ ХУУДАС</h1>
+
+        <nav>
+            <button class="active" onclick="showPage('home', this)">
+                Нүүр хуудас
+            </button>
+
+            <button onclick="showPage('images', this)">
+                Зургууд
+            </button>
+
+            <button onclick="showPage('videos', this)">
+                Бичлэгүүд
+            </button>
+
+            <button onclick="showPage('map', this)">
+                Газрын зураг
+            </button>
+        </nav>
+
+    </header>
+
+
+    <!-- ҮНДСЭН ХЭСЭГ -->
+    <div class="container">
+
+        <div class="profile">
+
+            <!-- ПРОФАЙЛ -->
+            <div class="profile-card">
+
+                <img src="web/nomi.png"
+                     alt="Профайл зураг">
+
+                <h2>ОЮУТАН</h2>
+
+                <div class="info">
+                    <p><b>Овог:</b> Батдэлгэр</p>
+                    <p><b>Нэр:</b> Номинчимэг</p>
+                    <p><b>Нас:</b> 20</p>
+                    <p><b>Сургууль:</b> СЭЗИС</p>
+                    <p><b>Мэргэжил:</b> Програм хангамж</p>
+                </div>
+
+            </div>
+
+
+            <!-- АГУУЛГА -->
+            <div id="content">
+
+                <h2>Сайн байна уу!</h2>
+
+                <p>
+                    Намайг <b>Номинчимэг</b> гэдэг.
+                    Би веб програмчлал болон технологийн чиглэлээр
+                    суралцдаг оюутан.
+                </p>
+
+                <p>
+                    Миний сонирхдог зүйлс:
+                </p>
+
+                <ul>
+                    <li>💻 Програмчлал</li>
+                    <li>🎮 Тоглоом</li>
+                    <li>🎵 Хөгжим</li>
+                    <li>📷 Гэрэл зураг</li>
+                    <li>⚽ Спорт</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 <span>Миний хувийн веб хуудас</span></p>
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        function showPage(page, button) {
+
+            // Агуулгын хэсгийг авах
+            const content = document.getElementById("content");
+
+            // Бүх товчны active class-ийг устгах
+            const buttons = document.querySelectorAll("nav button");
+
+            buttons.forEach(function(btn) {
+                btn.classList.remove("active");
+            });
+
+            // Дарсан товчийг active болгох
+            button.classList.add("active");
+
+
+            // НҮҮР ХУУДАС
+            if (page === "home") {
+
+                content.innerHTML = `
+                    <h2>Нүүр хуудас</h2>
+
+                    <p>
+                        Сайн байна уу! Намайг <b>Номинчимэг</b> гэдэг.
+                    </p>
+
+                    <p>
+                        Би СЭЗИС-д программ хангамжийн чиглэлээр
+                        суралцдаг.
+                    </p>
+
+                    <h3 style="color:#00ff99; margin-top:25px;">
+                        Миний дуртай зүйлс
+                    </h3>
+
+                    <p> Программчлал</p>
+                    <p> Компьютер тоглоом</p>
+                    <p> Хөгжим сонсох</p>
+                    <p> Спорт</p>
+                `;
+            }
+
+
+            // ЗУРГУУД
+            if (page === "images") {
+
+                content.innerHTML = `
+                    <h2>Миний зургууд</h2>
+
+                    <div class="gallery">
+
+                        <img src="web/nomi.png"
+                             alt="Компьютер">
+
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+                             alt="Програмчлал">
+
+                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420"
+                             alt="Тоглоом">
+
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
+                             alt="Laptop">
+
+                    </div>
+                `;
+            }
+
+
+            // БИЧЛЭГҮҮД
+            if (page === "videos") {
+
+                content.innerHTML = `
+                    <h2>Миний дуртай бичлэгүүд</h2>
+
+                    <div class="videos">
+
+                        <iframe
+                            src="https://youtube.com/embed/1zhR3T-_kE8?si=qiZ-guUK2OsJ4aSn"
+                            title="YouTube video"
+                            allowfullscreen>
+                        </iframe>
+
+                        <iframe
+                            src="https://youtube.com/embed/_xD1tE-BR_A?si=0KB0v9jWiCs79dEM"
+                            title="YouTube video"
+                            allowfullscreen>
+                        </iframe>
+
+                    </div>
+                `;
+            }
+
+
+            // ГАЗРЫН ЗУРАГ
+            if (page === "map") {
+
+                content.innerHTML = `
+                    <h2>🏠 Миний гэрийн хаяг</h2>
+
+                    <p>
+                        <b>Гэрийн хаяг:</b>
+                        Улаанбаатар хот, Сонгинохайрхан дүүрэг
+                    </p>
+
+                    <iframe
+                        class="map"
+                        src="https://www.google.com/maps?q=Ulaanbaatar,Mongolia SHD-19 khoroo&output=embed"
+                        loading="lazy">
+                    </iframe>
+                `;
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
